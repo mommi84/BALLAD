@@ -9,17 +9,30 @@ import java.util.TreeSet;
  */
 public class Dataset {
 
+	/**
+	 * Can be "source" or "target".
+	 */
+	private String status;
 	private String name;
 	private String url;
 	private File file;
 
 	private TreeSet<Resource> resources = new TreeSet<>();
 
-	public Dataset(String name, String url, File file) {
+	public Dataset(String status, String name, String url, File file) {
 		super();
+		this.status = status;
 		this.name = name;
 		this.url = url;
 		this.file = file;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public TreeSet<Resource> getResources() {

@@ -6,6 +6,7 @@ package org.aksw.simba.ballad.model;
  */
 public class Join {
 	
+	private String name;
 	private Dataset source;
 	private Dataset target;
 
@@ -29,5 +30,14 @@ public class Join {
 		super();
 		this.source = source;
 		this.target = target;
+		this.name = source.getName() + "::" + target.getName();
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

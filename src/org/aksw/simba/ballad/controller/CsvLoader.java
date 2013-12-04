@@ -1,6 +1,5 @@
 package org.aksw.simba.ballad.controller;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,6 +27,7 @@ public class CsvLoader implements Loader {
 		for(int i=0; i<titles.length; i++) {
 			Property p = new Property(titles[i], Bundle.getArrayValue(d.getStatus() + "_types", i));
 			props.add(p);
+			d.addProperty(p);
 		}
 		String[] nextLine;
 		while ((nextLine = reader.readNext()) != null) {

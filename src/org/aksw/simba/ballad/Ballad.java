@@ -2,10 +2,14 @@ package org.aksw.simba.ballad;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.TreeSet;
 
 import org.aksw.simba.ballad.controller.CsvLoader;
+import org.aksw.simba.ballad.controller.LinkSelector;
+import org.aksw.simba.ballad.controller.PropertyAligner;
 import org.aksw.simba.ballad.model.Dataset;
 import org.aksw.simba.ballad.model.Join;
+import org.aksw.simba.ballad.model.Link;
 import org.aksw.simba.ballad.model.Mapping;
 
 /**
@@ -40,7 +44,13 @@ public class Ballad {
 		loader.fillDataset(target);
 		loader.fillMapping(mapping);
 
-		// TODO map properties
+		// load property alignment
+		PropertyAligner pa = new PropertyAligner();
+		pa.align(source, target);
+		
+		// TODO join datasets and take 10%
+		TreeSet<Link> trainingSet = LinkSelector.select(source, target);
+		
 		
 	}
 

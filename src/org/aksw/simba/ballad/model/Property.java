@@ -1,5 +1,7 @@
 package org.aksw.simba.ballad.model;
 
+import java.util.TreeSet;
+
 /**
  * @author Tommaso Soru <tsoru@informatik.uni-leipzig.de>
  * 
@@ -11,6 +13,7 @@ public class Property {
 	public static final int TYPE_DATE = 2;
 	private String name;
 	private int type;
+	private TreeSet<Property> aligments = new TreeSet<>();
 
 	public Property(String name, int type) {
 		super();
@@ -32,6 +35,10 @@ public class Property {
 
 	public void setType(int type) {
 		this.type = type;
+	}
+	
+	public void addAlignment(Property p) {
+		aligments.add(p);
 	}
 
 }

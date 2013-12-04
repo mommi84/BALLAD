@@ -4,6 +4,9 @@ import java.io.File;
 import java.util.TreeSet;
 
 /**
+ * Mapping is a transitional class for storing perfect mappings loaded from a
+ * file.
+ * 
  * @author Tommaso Soru <tsoru@informatik.uni-leipzig.de>
  * 
  */

@@ -1,6 +1,7 @@
 package org.aksw.simba.ballad.model;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.TreeSet;
 
 /**
@@ -18,6 +19,7 @@ public class Dataset {
 	private File file;
 
 	private TreeSet<Resource> resources = new TreeSet<>();
+	private ArrayList<Property> properties = new ArrayList<>();
 
 	public Dataset(String status, String name, String url, File file) {
 		super();
@@ -69,5 +71,13 @@ public class Dataset {
 
 	public void addResource(Resource r) {
 		resources.add(r);
+	}
+
+	public void addProperty(Property p) {
+		properties.add(p);
+	}
+	
+	public Property getProperty(int i) {
+		return properties.get(i);
 	}
 }

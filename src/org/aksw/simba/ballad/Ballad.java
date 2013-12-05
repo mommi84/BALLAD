@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.TreeSet;
 
 import org.aksw.simba.ballad.controller.CsvLoader;
+import org.aksw.simba.ballad.controller.FeatureHandler;
 import org.aksw.simba.ballad.controller.Labeller;
 import org.aksw.simba.ballad.controller.LinkSelector;
 import org.aksw.simba.ballad.controller.PropertyAligner;
@@ -27,8 +28,10 @@ public class Ballad {
 	 */
 	public static void main(String[] args) throws IOException {
 
+		String joinName = args[0];
+		
 		// set properties
-		Bundle.setBundleName(args[0]);
+		Bundle.setBundleName(joinName);
 
 		Dataset source = new Dataset("source", Bundle.getString("source_name"),
 				Bundle.getString("source_url"), new File(
@@ -53,13 +56,13 @@ public class Ballad {
 		System.out.println("properties aligned");
 		
 		// select training set and label instances
-		TreeSet<Link> trainingSet = LinkSelector.select(source, target);
+		TreeSet<Link> trainingSet = LinkSelector.select(join);
 		System.out.println("links selected");
 		Labeller.label(trainingSet, mapping);
 		System.out.println("links labelled");
 		
 		// TODO compute features
-		
+		FeatureHandler.run(joinName, join);
 	}
 
 }

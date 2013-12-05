@@ -10,11 +10,7 @@ import org.aksw.simba.ballad.model.Property;
  */
 public class PropertyAligner {
 
-	public PropertyAligner() {
-		super();
-	}
-	
-	public void align(Dataset dS, Dataset dT) {
+	public static void align(Dataset dS, Dataset dT) {
 		String[] spa = Bundle.getString("source_property_align").split(",");
 		String[] tpa = Bundle.getString("target_property_align").split(",");
 	

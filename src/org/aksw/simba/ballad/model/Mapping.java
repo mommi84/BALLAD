@@ -14,7 +14,7 @@ public class Mapping {
 
 	private String name;
 	private File file;
-	private TreeSet<Pair<String, String>> pairs = new TreeSet<>();
+	private TreeSet<MappingUnit<String, String>> units = new TreeSet<>();
 
 	public Mapping(String name, File file) {
 		super();
@@ -38,41 +38,12 @@ public class Mapping {
 		this.file = file;
 	}
 
-	public TreeSet<Pair<String, String>> getPairs() {
-		return pairs;
+	public TreeSet<MappingUnit<String, String>> getUnits() {
+		return units;
 	}
 
-	public void setPairs(TreeSet<Pair<String, String>> pairs) {
-		this.pairs = pairs;
+	public void addUnit(String source, String target) {
+		units.add(new MappingUnit<String, String>(source, target));
 	}
 
-	public void addPair(String source, String target) {
-		pairs.add(new Pair<String, String>(source, target));
-	}
-}
-
-class Pair<F, S> {
-	private String first; // first member of pair
-	private String second; // second member of pair
-
-	public Pair(String first, String second) {
-		this.first = first;
-		this.second = second;
-	}
-
-	public void setFirst(String first) {
-		this.first = first;
-	}
-
-	public void setSecond(String second) {
-		this.second = second;
-	}
-
-	public String getFirst() {
-		return first;
-	}
-
-	public String getSecond() {
-		return second;
-	}
 }

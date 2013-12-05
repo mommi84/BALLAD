@@ -6,7 +6,7 @@ import java.util.HashMap;
  * @author Tommaso Soru <tsoru@informatik.uni-leipzig.de>
  * 
  */
-public class Resource {
+public class Resource implements Comparable<Resource> {
 
 	private String id;
 	private HashMap<Property, String> attr = new HashMap<>();
@@ -38,5 +38,10 @@ public class Resource {
 
 	public void setPropertyValue(Property p, String v) {
 		attr.put(p, v);
+	}
+
+	@Override
+	public int compareTo(Resource o) {
+		return id.compareTo(o.getId());
 	}
 }

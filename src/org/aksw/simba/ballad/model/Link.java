@@ -4,7 +4,7 @@ package org.aksw.simba.ballad.model;
  * @author Tommaso Soru <tsoru@informatik.uni-leipzig.de>
  * 
  */
-public class Link {
+public class Link implements Comparable<Link> {
 
 	public static final int LABEL_NO = -1;
 	public static final int UNLABELLED = 0;
@@ -55,5 +55,13 @@ public class Link {
 
 	public String getId() {
 		return source.getId() + "::" + target.getId();
+	}
+
+	@Override
+	public int compareTo(Link o) {
+		int f = source.compareTo(o.getSource());
+		if(f == 0)
+			return target.compareTo(o.getTarget());
+		return f;
 	}
 }

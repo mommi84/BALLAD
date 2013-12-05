@@ -9,12 +9,8 @@ import java.util.ResourceBundle;
  */
 public class Bundle {
 
-	/**
-	 * Default bundle name.
-	 */
-	private static String bundleName = "ballad";
-	private static ResourceBundle resBundle = ResourceBundle
-			.getBundle(bundleName);
+	private static String bundleName;
+	private static ResourceBundle resBundle;
 
 	public static String getBundleName() {
 		return bundleName;

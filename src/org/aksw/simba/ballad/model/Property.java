@@ -6,7 +6,7 @@ import java.util.TreeSet;
  * @author Tommaso Soru <tsoru@informatik.uni-leipzig.de>
  * 
  */
-public class Property {
+public class Property implements Comparable<Property> {
 
 	public static final int TYPE_STRING = 0;
 	public static final int TYPE_NUM = 1;
@@ -39,6 +39,11 @@ public class Property {
 	
 	public void addAlignment(Property p) {
 		aligments.add(p);
+	}
+
+	@Override
+	public int compareTo(Property o) {
+		return name.compareTo(o.getName());
 	}
 
 }

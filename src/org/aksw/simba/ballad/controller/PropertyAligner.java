@@ -29,7 +29,7 @@ public class PropertyAligner {
 			int indexS = Integer.parseInt(strS);
 			if(!index.containsKey(indexS)) {
 				Property property = source.getProperty(indexS);
-				PropertyAlignment pa = new PropertyAlignment("alignment"+indexS, property.getType());
+				PropertyAlignment pa = new PropertyAlignment(null, property.getType());
 				pa.addSourceProperty(property);
 				index.put(indexS, pa);
 			} else
@@ -46,13 +46,17 @@ public class PropertyAligner {
 		for(Integer i : index.keySet()) {
 			PropertyAlignment pa = index.get(i);
 			// only add alignments with some target properties
-			if(pa.getTargetProperties().size() > 0)
+			if(pa.getTargetProperties().size() > 0) {
 				join.addPropertyAlignment(pa);
-			// link them to their properties
-			for(Property p : pa.getSourceProperties())
-				p.setPropertyAlignment(pa);
-			for(Property p : pa.getTargetProperties())
-				p.setPropertyAlignment(pa);
+				// link them to their properties
+				for(Property p : pa.getSourceProperties())
+					p.setPropertyAlignment(pa);
+				for(Property p : pa.getTargetProperties())
+					p.setPropertyAlignment(pa);
+				// set their names
+				pa.setName(pa.getSourceProperties().get(0).getName() + "::" +
+						pa.getTargetProperties().get(0).getName());
+			}
 		}	
 	}
 }

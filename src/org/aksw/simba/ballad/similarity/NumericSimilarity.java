@@ -52,7 +52,7 @@ public class NumericSimilarity implements Similarity {
 		
 		// TODO the current approach ignores one-to-many alignments
 		Property sourceProperty = propertyAlignment.getSourceProperties().get(0);
-		Property targetProperty = propertyAlignment.getSourceProperties().get(0);
+		Property targetProperty = propertyAlignment.getTargetProperties().get(0);
 
 		TreeSet<Resource> sources = join.getSource().getResources();
 		TreeSet<Resource> targets = join.getTarget().getResources();

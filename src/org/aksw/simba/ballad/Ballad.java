@@ -52,7 +52,6 @@ public class Ballad {
 		System.out.println("properties aligned");
 		
 		// generate feature csv files
-		// TODO if can't find <setting>.features file, build it
 		OutputHandler oh = new OutputHandler(join, mapping);
 		oh.run();
 		System.out.println("output handler ready");

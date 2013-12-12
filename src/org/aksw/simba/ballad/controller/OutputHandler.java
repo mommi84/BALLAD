@@ -90,7 +90,8 @@ public class OutputHandler {
 	
 	public void computeTrainingSet() {
 		
-		trainWriter = new CsvWriter(join.getSetting()+"_train.features");
+		trainWriter = new CsvWriter("features/"+join.getSetting()+"_train.features");
+		trainWriter.write(buildTitleString());
 		
 		// saves training set
 		for(Link l : trainingSet)
@@ -102,8 +103,9 @@ public class OutputHandler {
 	
 	public void computeTestSet() {
 		
-		testWriter = new CsvWriter(join.getSetting()+"_test.features");
-
+		testWriter = new CsvWriter("features/"+join.getSetting()+"_test.features");
+		testWriter.write(buildTitleString());
+		
 		// saves test set
 		for (Resource s : src)
 			for (Resource t : tgt)
@@ -113,6 +115,18 @@ public class OutputHandler {
 
 	}
 
+	private String buildTitleString() {
+		
+		String out = "id#";
+		for (PropertyAlignment pa : alignments)
+			for(Similarity sim : pa.getSimilarities())
+				out += sim.getName()+" "+pa.getName()+"#";
+		out += "class";
+		
+		return out;
+		
+	}
+	
 	private String buildOutString(Link l) {
 		
 		Resource s = l.getSource();

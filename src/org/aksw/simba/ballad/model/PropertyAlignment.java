@@ -18,6 +18,7 @@ public class PropertyAlignment {
 	
 	public PropertyAlignment(String name, int type) {
 		this.name = name;
+		this.type = type;
 	}
 	
 	public void addSimilarity(Similarity similarity) {

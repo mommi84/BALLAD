@@ -29,6 +29,10 @@ public class Dataset {
 		this.file = file;
 	}
 
+	public ArrayList<Property> getProperties() {
+		return properties;
+	}
+
 	public String getStatus() {
 		return status;
 	}

@@ -1,6 +1,6 @@
 package org.aksw.simba.ballad.model;
 
-import java.util.TreeSet;
+import java.util.ArrayList;
 
 /**
  * @author Tommaso Soru <tsoru@informatik.uni-leipzig.de>
@@ -13,7 +13,7 @@ public class Property implements Comparable<Property> {
 	public static final int TYPE_DATE = 2;
 	private String name;
 	private int type;
-	private TreeSet<Property> aligments = new TreeSet<>();
+	private ArrayList<Property> alignments = new ArrayList<>();
 
 	public Property(String name, int type) {
 		super();
@@ -38,7 +38,11 @@ public class Property implements Comparable<Property> {
 	}
 	
 	public void addAlignment(Property p) {
-		aligments.add(p);
+		alignments.add(p);
+	}
+
+	public Property getAlignment(int i) {
+		return alignments.get(i);
 	}
 
 	@Override

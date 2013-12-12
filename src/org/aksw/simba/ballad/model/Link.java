@@ -1,5 +1,7 @@
 package org.aksw.simba.ballad.model;
 
+import java.util.ArrayList;
+
 /**
  * @author Tommaso Soru <tsoru@informatik.uni-leipzig.de>
  * 
@@ -12,7 +14,7 @@ public class Link implements Comparable<Link> {
 
 	private Resource source;
 	private Resource target;
-	private Double similarity = 0.0;
+	private ArrayList<Double> similarities = new ArrayList<>();
 	private int label = UNLABELLED;
 
 	public Link(Resource source, Resource target) {
@@ -45,12 +47,16 @@ public class Link implements Comparable<Link> {
 		this.target = target;
 	}
 
-	public Double getSimilarity() {
-		return similarity;
+	public Double getSimilarity(int i) {
+		return similarities.get(i);
+	}
+	
+	public void addSimilarity(Double similarity) {
+		similarities.add(similarity);
 	}
 
-	public void setSimilarity(Double similarity) {
-		this.similarity = similarity;
+	public void setSimilarity(Double similarity, int i) {
+		similarities.set(i, similarity);
 	}
 
 	public String getId() {

@@ -28,10 +28,10 @@ public class Ballad {
 	 */
 	public static void main(String[] args) throws IOException {
 
-		String joinName = args[0];
+		String setting = args[0];
 		
 		// set properties
-		Bundle.setBundleName(joinName);
+		Bundle.setBundleName(setting);
 
 		Dataset source = new Dataset("source", Bundle.getString("source_name"),
 				Bundle.getString("source_url"), new File(
@@ -62,7 +62,7 @@ public class Ballad {
 		System.out.println("links labelled");
 		
 		// TODO compute features
-		FeatureHandler.run(joinName, join);
+		FeatureHandler.run(setting, join);
 	}
 
 }

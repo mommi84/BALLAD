@@ -3,7 +3,6 @@ package org.aksw.simba.ballad.similarity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.TreeSet;
 
 import org.aksw.simba.ballad.model.Join;
 import org.aksw.simba.ballad.model.Property;
@@ -17,9 +16,11 @@ public class WeightedNgramSimilarity implements Similarity {
 
 	private int n;
 	private HashMap<String, Double> weights = new HashMap<String, Double>();
+	private Property p;
 	
-	public WeightedNgramSimilarity(int n) {
+	public WeightedNgramSimilarity(Property p, int n) {
 		super();
+		this.p = p;
 		this.n = n;
 	}
 	
@@ -97,55 +98,58 @@ public class WeightedNgramSimilarity implements Similarity {
 	}
 
 	public void loadWeightsFromDatasets(Join join) {
-//		TreeSet<Resource> sources = join.getSource().getResources();
-//		TreeSet<Resource> targets = join.getTarget().getResources();
-//		
-//		ArrayList<Resource> all = new ArrayList<Resource>();
-//		all.addAll(sources);
-//		all.addAll(targets);
-//		
-//		HashMap<String, Integer> tf_gen = new HashMap<String, Integer>();
-//		HashMap<String, Integer> idf_den = new HashMap<String, Integer>();
-//		
-//		for(Resource r : all) {
-//			HashMap<String, Integer> tf_p = new HashMap<String, Integer>();
-//			ArrayList<String> ngs = getNgrams(r.getPropertyValue(), n);
-//			for(String ng : ngs) {
-//				Integer cnt = tf_p.get(ng);
-//				if(cnt == null)
-//					tf_p.put(ng, 1);
-//				else
-//					tf_p.put(ng, cnt+1);
-//			}
-//			for(String ng : tf_p.keySet()) {
-//				Integer part = tf_gen.get(ng);
-//				if(part == null)
-//					tf_gen.put(ng, tf_p.get(ng));
-//				else
-//					tf_gen.put(ng, part + tf_p.get(ng));
-//				
-//				Integer cnt = idf_den.get(ng);
-//				if(cnt == null)
-//					idf_den.put(ng, 1);
-//				else
-//					idf_den.put(ng, cnt+1);
-//			}
-//		}
-//		
-//		for(String ng : idf_den.keySet()) {
-//			double tf = (double) tf_gen.get(ng);
-//			double idf = Math.log((double) all.size() / (double) idf_den.get(ng));
-//			weights.put(ng, tf * idf);
-//		}
-//		
-//		double max = 0.0;
-//		for(Double d : weights.values())
-//			if(d > max)
-//				max = d;
-//		for(String k : weights.keySet())
-//			weights.put(k, weights.get(k) / max);
-//		
-//		System.out.println(weights);
+		ArrayList<Resource> sources = new ArrayList<Resource>(join.getSource().getResources());
+		ArrayList<Resource> targets = new ArrayList<Resource>(join.getTarget().getResources());
+		
+		HashMap<String, Integer> tf_gen = new HashMap<String, Integer>();
+		HashMap<String, Integer> idf_den = new HashMap<String, Integer>();
+		
+		buildTfIdf(sources, tf_gen, idf_den, p);
+		// TODO one-to-many approach
+		buildTfIdf(targets, tf_gen, idf_den, p.getAlignment(0));
+		
+		for(String ng : idf_den.keySet()) {
+			double tf = (double) tf_gen.get(ng);
+			double idf = Math.log((double) (sources.size()+targets.size()) / (double) idf_den.get(ng));
+			weights.put(ng, tf * idf);
+		}
+		
+		double max = 0.0;
+		for(Double d : weights.values())
+			if(d > max)
+				max = d;
+		for(String k : weights.keySet())
+			weights.put(k, weights.get(k) / max);
+		
+		System.out.println(weights);
+	}
+	
+	private void buildTfIdf(ArrayList<Resource> resources, HashMap<String, Integer> tf_gen, HashMap<String, Integer> idf_den,
+			Property property) {
+		for(Resource r : resources) {
+			HashMap<String, Integer> tf_p = new HashMap<String, Integer>();
+			ArrayList<String> ngs = getNgrams(r.getPropertyValue(property), n);
+			for(String ng : ngs) {
+				Integer cnt = tf_p.get(ng);
+				if(cnt == null)
+					tf_p.put(ng, 1);
+				else
+					tf_p.put(ng, cnt+1);
+			}
+			for(String ng : tf_p.keySet()) {
+				Integer part = tf_gen.get(ng);
+				if(part == null)
+					tf_gen.put(ng, tf_p.get(ng));
+				else
+					tf_gen.put(ng, part + tf_p.get(ng));
+				
+				Integer cnt = idf_den.get(ng);
+				if(cnt == null)
+					idf_den.put(ng, 1);
+				else
+					idf_den.put(ng, cnt+1);
+			}
+		}
 	}
 
 }

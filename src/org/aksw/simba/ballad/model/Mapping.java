@@ -3,6 +3,8 @@ package org.aksw.simba.ballad.model;
 import java.io.File;
 import java.util.TreeSet;
 
+import org.aksw.simba.ballad.util.Convention;
+
 /**
  * Mapping is a transitional class for storing perfect mappings loaded from a
  * file.
@@ -14,7 +16,7 @@ public class Mapping {
 
 	private String name;
 	private File file;
-	private TreeSet<MappingUnit<String, String>> units = new TreeSet<>();
+	private TreeSet<String> labels = new TreeSet<>();
 
 	public Mapping(String name, File file) {
 		super();
@@ -38,12 +40,12 @@ public class Mapping {
 		this.file = file;
 	}
 
-	public TreeSet<MappingUnit<String, String>> getUnits() {
-		return units;
+	public TreeSet<String> getLabels() {
+		return labels;
 	}
 
-	public void addUnit(String source, String target) {
-		units.add(new MappingUnit<String, String>(source, target));
+	public void addLabel(String source, String target) {
+		labels.add(Convention.toID(source, target));
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import org.aksw.simba.ballad.model.Join;
 import org.aksw.simba.ballad.model.Property;
+import org.aksw.simba.ballad.model.PropertyAlignment;
 import org.aksw.simba.ballad.model.Resource;
 
 /**
@@ -16,11 +17,9 @@ public class WeightedNgramSimilarity implements Similarity {
 
 	private int n;
 	private HashMap<String, Double> weights = new HashMap<String, Double>();
-	private Property p;
 	
-	public WeightedNgramSimilarity(Property p, int n) {
+	public WeightedNgramSimilarity(int n) {
 		super();
-		this.p = p;
 		this.n = n;
 	}
 	
@@ -97,16 +96,16 @@ public class WeightedNgramSimilarity implements Similarity {
 		this.n = n;
 	}
 
-	public void loadWeightsFromDatasets(Join join) {
+	public void useWeightsFromDatasets(Join join, PropertyAlignment pa) {
 		ArrayList<Resource> sources = new ArrayList<Resource>(join.getSource().getResources());
 		ArrayList<Resource> targets = new ArrayList<Resource>(join.getTarget().getResources());
 		
 		HashMap<String, Integer> tf_gen = new HashMap<String, Integer>();
 		HashMap<String, Integer> idf_den = new HashMap<String, Integer>();
 		
-		buildTfIdf(sources, tf_gen, idf_den, p);
-		// TODO one-to-many approach
-		buildTfIdf(targets, tf_gen, idf_den, p.getAlignment(0));
+		// TODO the current approach ignores one-to-many alignments
+		buildTfIdf(sources, tf_gen, idf_den, pa.getSourceProperties().get(0));
+		buildTfIdf(targets, tf_gen, idf_den, pa.getTargetProperties().get(0));
 		
 		for(String ng : idf_den.keySet()) {
 			double tf = (double) tf_gen.get(ng);

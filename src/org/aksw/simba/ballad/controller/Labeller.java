@@ -5,9 +5,9 @@ import java.util.TreeSet;
 
 import org.aksw.simba.ballad.model.Link;
 import org.aksw.simba.ballad.model.Mapping;
-import org.aksw.simba.ballad.model.MappingUnit;
 
 /**
+ * To be used later maybe.
  * @author Tommaso Soru <tsoru@informatik.uni-leipzig.de>
  *
  */
@@ -15,7 +15,7 @@ public class Labeller {
 	
 	public static void label(TreeSet<Link> links, Mapping mapping) {
 		
-		TreeSet<MappingUnit<String, String>> units = mapping.getUnits();
+		TreeSet<String> labels = mapping.getLabels();
 		
 		// index links and set default
 		HashMap<String, Link> index = new HashMap<>();
@@ -25,10 +25,9 @@ public class Labeller {
 		}
 		
 		// label links
-		for(MappingUnit<String, String> unit : units) {
-			String id = unit.getFirst() + "::" + unit.getSecond();
-			if(index.containsKey(id))
-				index.get(id).setLabel(Link.LABEL_YES);
+		for(String label : labels) {
+			if(index.containsKey(label))
+				index.get(label).setLabel(Link.LABEL_YES);
 		}
 				
 	}

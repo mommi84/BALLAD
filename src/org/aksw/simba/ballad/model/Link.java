@@ -1,6 +1,8 @@
 package org.aksw.simba.ballad.model;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.aksw.simba.ballad.util.Convention;
 
 /**
  * @author Tommaso Soru <tsoru@informatik.uni-leipzig.de>
@@ -14,7 +16,7 @@ public class Link implements Comparable<Link> {
 
 	private Resource source;
 	private Resource target;
-	private ArrayList<Double> similarities = new ArrayList<>();
+	private HashMap<PropertyAlignment, Double> similarities = new HashMap<>();
 	private int label = UNLABELLED;
 
 	public Link(Resource source, Resource target) {
@@ -47,20 +49,16 @@ public class Link implements Comparable<Link> {
 		this.target = target;
 	}
 
-	public Double getSimilarity(int i) {
-		return similarities.get(i);
+	public Double getSimilarityAt(PropertyAlignment pa) {
+		return similarities.get(pa);
 	}
 	
-	public void addSimilarity(Double similarity) {
-		similarities.add(similarity);
-	}
-
-	public void setSimilarity(Double similarity, int i) {
-		similarities.set(i, similarity);
+	public void addSimilarity(PropertyAlignment pa, Double similarity) {
+		similarities.put(pa, similarity);
 	}
 
 	public String getId() {
-		return source.getId() + "::" + target.getId();
+		return Convention.toID(source.getId(), target.getId());
 	}
 
 	@Override

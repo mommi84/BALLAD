@@ -12,7 +12,7 @@ import weka.core.converters.ConverterUtils.DataSource;
  */
 public class WekaPlayground {
 
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) throws Exception {
 
 //		// Declare two numeric attributes
 //		Attribute Attribute1 = new Attribute("firstNumeric");

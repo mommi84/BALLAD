@@ -1,6 +1,5 @@
 package org.aksw.simba.ballad.model;
 
-import java.util.ArrayList;
 
 /**
  * @author Tommaso Soru <tsoru@informatik.uni-leipzig.de>
@@ -13,7 +12,7 @@ public class Property implements Comparable<Property> {
 	public static final int TYPE_DATE = 2;
 	private String name;
 	private int type;
-	private ArrayList<Property> alignments = new ArrayList<>();
+	private PropertyAlignment propertyAlignment;
 
 	public Property(String name, int type) {
 		super();
@@ -37,17 +36,17 @@ public class Property implements Comparable<Property> {
 		this.type = type;
 	}
 	
-	public void addAlignment(Property p) {
-		alignments.add(p);
-	}
-
-	public Property getAlignment(int i) {
-		return alignments.get(i);
-	}
-
 	@Override
 	public int compareTo(Property o) {
 		return name.compareTo(o.getName());
+	}
+
+	public PropertyAlignment getPropertyAlignment() {
+		return propertyAlignment;
+	}
+
+	public void setPropertyAlignment(PropertyAlignment propertyAlignment) {
+		this.propertyAlignment = propertyAlignment;
 	}
 
 }

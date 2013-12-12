@@ -2,16 +2,12 @@ package org.aksw.simba.ballad;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.TreeSet;
 
+import org.aksw.simba.ballad.controller.OutputHandler;
 import org.aksw.simba.ballad.controller.CsvLoader;
-import org.aksw.simba.ballad.controller.FeatureHandler;
-import org.aksw.simba.ballad.controller.Labeller;
-import org.aksw.simba.ballad.controller.LinkSelector;
 import org.aksw.simba.ballad.controller.PropertyAligner;
 import org.aksw.simba.ballad.model.Dataset;
 import org.aksw.simba.ballad.model.Join;
-import org.aksw.simba.ballad.model.Link;
 import org.aksw.simba.ballad.model.Mapping;
 
 /**
@@ -39,7 +35,7 @@ public class Ballad {
 		Dataset target = new Dataset("target", Bundle.getString("target_name"),
 				Bundle.getString("target_url"), new File(
 						Bundle.getString("target_file")));
-		Join join = new Join(source, target);
+		Join join = new Join(source, target, setting);
 		Mapping mapping = new Mapping(join.getName(), new File(
 				Bundle.getString("mapping_file")));
 
@@ -52,17 +48,19 @@ public class Ballad {
 		System.out.println("mapping loaded");
 
 		// load property alignment
-		PropertyAligner.align(source, target);
+		PropertyAligner.align(join);
 		System.out.println("properties aligned");
 		
-		// select training set and label instances
-		TreeSet<Link> trainingSet = LinkSelector.select(join);
-		System.out.println("links selected");
-		Labeller.label(trainingSet, mapping);
-		System.out.println("links labelled");
+		// generate feature csv files
+		// TODO if can't find <setting>.features file, build it
+		OutputHandler oh = new OutputHandler(join, mapping);
+		oh.run();
+		System.out.println("output handler ready");
+		oh.computeTrainingSet();
+		System.out.println("training set computed");
+		oh.computeTestSet();
+		System.out.println("test set computed");
 		
-		// TODO compute features
-		FeatureHandler.run(setting, join);
 	}
 
 }

@@ -51,7 +51,7 @@ public class CsvLoader implements Loader {
 		reader.readNext(); // skips the column titles
 		String[] nextLine;
 		while ((nextLine = reader.readNext()) != null) {
-			m.addUnit(nextLine[0], nextLine[1]);
+			m.addLabel(nextLine[0], nextLine[1]);
 		}
 		reader.close();
 

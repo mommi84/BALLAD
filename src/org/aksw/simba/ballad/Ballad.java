@@ -1,10 +1,10 @@
 package org.aksw.simba.ballad;
 
 import java.io.File;
-import java.io.IOException;
 
-import org.aksw.simba.ballad.controller.OutputHandler;
+import org.aksw.simba.ballad.classifier.WekaHandler;
 import org.aksw.simba.ballad.controller.CsvLoader;
+import org.aksw.simba.ballad.controller.OutputHandler;
 import org.aksw.simba.ballad.controller.PropertyAligner;
 import org.aksw.simba.ballad.model.Dataset;
 import org.aksw.simba.ballad.model.Join;
@@ -20,9 +20,9 @@ public class Ballad {
 
 	/**
 	 * @param args
-	 * @throws IOException
+	 * @throws Exception 
 	 */
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws Exception {
 
 		String setting = args[0];
 		
@@ -53,13 +53,16 @@ public class Ballad {
 		
 		// generate feature csv files
 		OutputHandler oh = new OutputHandler(join, mapping);
-		oh.run();
 		System.out.println("output handler ready");
-		oh.computeTrainingSet();
-		System.out.println("training set computed");
-		oh.computeTestSet();
-		System.out.println("test set computed");
+		oh.computeTrainingSet(false);
+		System.out.println("training set ready");
+		oh.computeTestSet(false);
+		System.out.println("test set ready");
 		
+		// train classifier
+		WekaHandler weka = new WekaHandler("MultilayerPerceptron",
+				oh.getTrainFile(), oh.getTestFile());
+		System.out.println("Fscore() = "+weka.getFScore());
 	}
 
 }

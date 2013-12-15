@@ -1,5 +1,6 @@
 package org.aksw.simba.ballad.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.TreeSet;
@@ -33,17 +34,20 @@ public class OutputHandler {
 	private HashMap<Integer, ArrayList<Similarity>> simMap = new HashMap<>();
 	CsvWriter testWriter;
 	CsvWriter trainWriter;
+	String trainFile, testFile;
 
 	public OutputHandler(Join join, Mapping mapping) {
 	
 		this.setJoin(join);
 		this.setMapping(mapping);
-		
+		run();
 	}
-	
-	public void run() {
+
+	private void run() {
 		
 		labels = mapping.getLabels();
+		trainFile = "features/"+join.getSetting()+"_train.features.csv";
+		testFile = "features/"+join.getSetting()+"_test.features.csv";
 		
 		// TODO load these from config file
 		ArrayList<Similarity> stringSims = new ArrayList<>();
@@ -69,11 +73,11 @@ public class OutputHandler {
 			if (!trainingSet.contains(l))
 				trainingSet.add(l);
 		}
-
+	
 		// get resources and source properties
 		src = source.getResources();
 		tgt = target.getResources();
-
+	
 		// get property alignments
 		alignments = join.getPropertyAlignments();
 		for (PropertyAlignment p : alignments) {
@@ -87,10 +91,13 @@ public class OutputHandler {
 				
 		}
 	}
-	
-	public void computeTrainingSet() {
+
+	public void computeTrainingSet(boolean forceOverwrite) {
 		
-		trainWriter = new CsvWriter("features/"+join.getSetting()+"_train.features");
+		if(new File(trainFile).isFile())
+			return;
+		
+		trainWriter = new CsvWriter(trainFile);
 		trainWriter.write(buildTitleString());
 		
 		// saves training set
@@ -98,12 +105,15 @@ public class OutputHandler {
 			trainWriter.write(buildOutString(l));
 		
 		trainWriter.close();
-
-	}
 	
-	public void computeTestSet() {
+	}
+
+	public void computeTestSet(boolean forceOverwrite) {
 		
-		testWriter = new CsvWriter("features/"+join.getSetting()+"_test.features");
+		if(new File(testFile).isFile())
+			return;
+		
+		testWriter = new CsvWriter(testFile);
 		testWriter.write(buildTitleString());
 		
 		// saves test set
@@ -112,7 +122,7 @@ public class OutputHandler {
 				testWriter.write(buildOutString(new Link(s, t)));
 		
 		testWriter.close();
-
+	
 	}
 
 	private String buildTitleString() {
@@ -126,7 +136,7 @@ public class OutputHandler {
 		return out;
 		
 	}
-	
+
 	private String buildOutString(Link l) {
 		
 		Resource s = l.getSource();
@@ -152,6 +162,14 @@ public class OutputHandler {
 		out += "#" + label;
 		
 		return out;
+	}
+
+	public String getTrainFile() {
+		return trainFile;
+	}
+
+	public String getTestFile() {
+		return testFile;
 	}
 
 	public Join getJoin() {

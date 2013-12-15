@@ -1,10 +1,13 @@
 package org.aksw.simba.ballad.classifier;
 
-import weka.core.Instances;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
-import weka.classifiers.trees.J48;
+import weka.classifiers.functions.MultilayerPerceptron;
+import weka.core.Instance;
+import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
+import weka.filters.Filter;
+import weka.filters.unsupervised.attribute.Remove;
 
 /**
  * @author Tommaso Soru <tsoru@informatik.uni-leipzig.de>
@@ -12,25 +15,149 @@ import weka.core.converters.ConverterUtils.DataSource;
  */
 public class WekaHandler {
 	
-	public static void run(String trainFile, String testFile) throws Exception {
+	private String classifier;
+	private String trainFile;
+	private String testFile;
+	private Classifier cModel;
+	
+	private Evaluation eTest;
+	private int classIndex;
+	private Instances train, test;
+
+	
+	// TODO transform to WekaClassifier object
+	public WekaHandler(String classifier, String trainFile, String testFile) {
 		
-		DataSource src = new DataSource(trainFile);
-		DataSource tgt = new DataSource(testFile);
-		Instances train = src.getDataSet();
-		Instances test = tgt.getDataSet();
+		this.classifier = classifier;
+		this.trainFile = trainFile;
+		this.testFile = testFile;
 		
-		// train classifier
-		Classifier cls = new J48();
-		cls.buildClassifier(train);
+		switch(classifier) {
+		case "MultilayerPerceptron":
+			System.out.println();
+			this.cModel = new MultilayerPerceptron();
+			run();
+			break;
+		}
 		
-		// evaluate classifier and print some statistics
-		Evaluation eval = new Evaluation(train);
-		eval.evaluateModel(cls, test);
-		System.out.println(eval.toSummaryString("\nResults\n======\n", false));
 	}
 	
-	public static void main(String[] args) throws Exception {
-		run("etc/train.csv", "etc/test.csv");
+	public void run() {
+
+		DataSource trainds, testds;
+		
+		try {
+			
+			trainds = new DataSource(trainFile);
+			train = removeFirstAttribute( trainds.getDataSet() );
+			classIndex = train.numAttributes()-1;
+			train.setClassIndex(classIndex);
+			
+			testds = new DataSource(testFile);
+			test = removeFirstAttribute( testds.getDataSet() );
+			test.setClassIndex(classIndex);
+			
+			cModel.buildClassifier(train);
+			
+			// Test the model
+			eTest = new Evaluation(train);
+			eTest.evaluateModel(cModel, test);
+			
+		} catch (Exception e) {
+			
+			System.err.println("Error during classification.");
+			e.printStackTrace();
+			return;
+			
+		}
+		
+		// Print the result à la Weka explorer:
+		String strSummary = eTest.toSummaryString();
+		System.out.println(strSummary);
 	}
 	
+	private Instances removeFirstAttribute(Instances inst) {
+		
+		String[] options = new String[2];
+		// "range"
+		options[0] = "-R";
+		// first attribute
+		options[1] = "1";
+		// new instance of filter
+		Remove remove = new Remove();
+		// set options
+		try {
+			remove.setOptions(options);
+			// inform filter about dataset **AFTER** setting options
+			remove.setInputFormat(inst);
+			// apply filter
+			return Filter.useFilter(inst, remove);
+		} catch (Exception e) {
+			System.err.println("Can't remove first attribute.");
+			return null;
+		}
+		
+	}
+
+	public String getTrainFile() {
+		return trainFile;
+	}
+
+	public void setTrainFile(String trainFile) {
+		this.trainFile = trainFile;
+	}
+
+	public String getTestFile() {
+		return testFile;
+	}
+
+	public void setTestFile(String testFile) {
+		this.testFile = testFile;
+	}
+
+	public String getClassifier() {
+		return classifier;
+	}
+
+	public Classifier getcModel() {
+		return cModel;
+	}	
+	
+	public double getFScore() {
+		
+		double tp = 0, fp = 0, tn = 0, fn = 0;
+		int value, thValue;
+		
+		for(int j=0; j<test.numInstances(); j++) {
+			Instance ins = test.instance(j);
+			try {
+				value = (int) Math.round( cModel.classifyInstance(ins) );
+			} catch (Exception e) {
+				e.printStackTrace();
+				return -1;
+			}
+			thValue = (int) Math.round( ins.value(classIndex) );
+			if(thValue == 1) {
+				if(value == 1)
+					tp++;
+				else
+					fn++;
+			} else {
+				if(value == 0)
+					tn++;
+				else
+					fp++;
+			}
+		}
+		
+		double pr = tp / (tp + fp);
+		double rc = tp / (tp + fn);
+		
+		System.out.println("tp = "+tp+"\tfp = "+fp);
+		System.out.println("tn = "+tn+"\tfn = "+fn);
+		System.out.println("pr = "+pr+"\nrc = "+rc);
+		
+		return 2 * pr * rc / (pr + rc);
+		
+	}
 }

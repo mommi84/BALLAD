@@ -2,7 +2,6 @@ package org.aksw.simba.ballad.classifier;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
-import weka.classifiers.functions.MultilayerPerceptron;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
@@ -13,32 +12,22 @@ import weka.filters.unsupervised.attribute.Remove;
  * @author Tommaso Soru <tsoru@informatik.uni-leipzig.de>
  *
  */
-public class WekaHandler {
+public abstract class WekaClassifier {
 	
-	private String classifier;
+	private String name;
 	private String trainFile;
 	private String testFile;
-	private Classifier cModel;
+	
+	protected Classifier cModel;
 	
 	private Evaluation eTest;
 	private int classIndex;
 	private Instances train, test;
-
 	
-	// TODO transform to WekaClassifier object
-	public WekaHandler(String classifier, String trainFile, String testFile) {
+	public WekaClassifier(String trainFile, String testFile) {
 		
-		this.classifier = classifier;
 		this.trainFile = trainFile;
 		this.testFile = testFile;
-		
-		switch(classifier) {
-		case "MultilayerPerceptron":
-			System.out.println();
-			this.cModel = new MultilayerPerceptron();
-			run();
-			break;
-		}
 		
 	}
 	
@@ -115,8 +104,8 @@ public class WekaHandler {
 		this.testFile = testFile;
 	}
 
-	public String getClassifier() {
-		return classifier;
+	public String getName() {
+		return name;
 	}
 
 	public Classifier getcModel() {

@@ -2,7 +2,8 @@ package org.aksw.simba.ballad;
 
 import java.io.File;
 
-import org.aksw.simba.ballad.classifier.WekaHandler;
+import org.aksw.simba.ballad.classifier.MultilayerPerceptronClassifier;
+import org.aksw.simba.ballad.classifier.WekaClassifier;
 import org.aksw.simba.ballad.controller.CsvLoader;
 import org.aksw.simba.ballad.controller.OutputHandler;
 import org.aksw.simba.ballad.controller.PropertyAligner;
@@ -60,7 +61,7 @@ public class Ballad {
 		System.out.println("test set ready");
 		
 		// train classifier
-		WekaHandler weka = new WekaHandler("MultilayerPerceptron",
+		WekaClassifier weka = new MultilayerPerceptronClassifier(
 				oh.getTrainFile(), oh.getTestFile());
 		System.out.println("Fscore() = "+weka.getFScore());
 	}

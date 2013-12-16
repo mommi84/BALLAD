@@ -2,7 +2,13 @@ package org.aksw.simba.ballad;
 
 import java.io.File;
 
+import org.aksw.simba.ballad.classifier.BasicClassifier;
+import org.aksw.simba.ballad.classifier.DecisionTableClassifier;
+import org.aksw.simba.ballad.classifier.LinearSvmClassifier;
+import org.aksw.simba.ballad.classifier.LogisticClassifier;
 import org.aksw.simba.ballad.classifier.MultilayerPerceptronClassifier;
+import org.aksw.simba.ballad.classifier.NaiveBayesClassifier;
+import org.aksw.simba.ballad.classifier.RandomTreeClassifier;
 import org.aksw.simba.ballad.classifier.WekaClassifier;
 import org.aksw.simba.ballad.controller.CsvLoader;
 import org.aksw.simba.ballad.controller.OutputHandler;
@@ -61,9 +67,11 @@ public class Ballad {
 		System.out.println("test set ready");
 		
 		// train classifier
-		WekaClassifier weka = new MultilayerPerceptronClassifier(
+		BasicClassifier classifier = new LinearSvmClassifier( //DecisionTableClassifier( //MultilayerPerceptronClassifier(
 				oh.getTrainFile(), oh.getTestFile());
-		System.out.println("Fscore() = "+weka.getFScore());
+		System.out.println(classifier.getDescription());
+		classifier.computeFscore();
+		classifier.printDetails();
 	}
 
 }

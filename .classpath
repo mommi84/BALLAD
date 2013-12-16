@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="lib/weka.jar"/>
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.27-bin.jar"/>
 	<classpathentry kind="lib" path="lib/simmetrics_jar_v1_6_2_d07_02_07.jar"/>
+	<classpathentry kind="lib" path="lib/libsvm.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

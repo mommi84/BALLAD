@@ -2,7 +2,6 @@ package org.aksw.simba.ballad.classifier;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
-import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.filters.Filter;
@@ -12,31 +11,31 @@ import weka.filters.unsupervised.attribute.Remove;
  * @author Tommaso Soru <tsoru@informatik.uni-leipzig.de>
  *
  */
-public abstract class WekaClassifier {
+public abstract class WekaClassifier implements BasicClassifier {
 	
-	private String name;
 	private String trainFile;
 	private String testFile;
+	private double tp = 0, fp = 0, tn = 0, fn = 0, precision, recall, fscore;
 	
 	protected Classifier cModel;
 	
 	private Evaluation eTest;
 	private int classIndex;
 	private Instances train, test;
+	private DataSource trainds, testds;
+
 	
 	public WekaClassifier(String trainFile, String testFile) {
 		
 		this.trainFile = trainFile;
 		this.testFile = testFile;
-		
+
 	}
 	
 	public void run() {
 
-		DataSource trainds, testds;
-		
 		try {
-			
+						
 			trainds = new DataSource(trainFile);
 			train = removeFirstAttribute( trainds.getDataSet() );
 			classIndex = train.numAttributes()-1;
@@ -45,7 +44,7 @@ public abstract class WekaClassifier {
 			testds = new DataSource(testFile);
 			test = removeFirstAttribute( testds.getDataSet() );
 			test.setClassIndex(classIndex);
-			
+
 			cModel.buildClassifier(train);
 			
 			// Test the model
@@ -104,49 +103,50 @@ public abstract class WekaClassifier {
 		this.testFile = testFile;
 	}
 
-	public String getName() {
-		return name;
+	public String getDescription() {
+		return cModel.toString();
 	}
 
 	public Classifier getcModel() {
 		return cModel;
 	}	
 	
-	public double getFScore() {
+	public double computeFscore() {
 		
-		double tp = 0, fp = 0, tn = 0, fn = 0;
-		int value, thValue;
-		
-		for(int j=0; j<test.numInstances(); j++) {
-			Instance ins = test.instance(j);
-			try {
-				value = (int) Math.round( cModel.classifyInstance(ins) );
-			} catch (Exception e) {
-				e.printStackTrace();
-				return -1;
-			}
-			thValue = (int) Math.round( ins.value(classIndex) );
-			if(thValue == 1) {
-				if(value == 1)
-					tp++;
-				else
-					fn++;
-			} else {
-				if(value == 0)
-					tn++;
-				else
-					fp++;
-			}
+		try {
+			// class 1 is "positive"
+			tp = eTest.numTruePositives(1);
+			tn = eTest.numTrueNegatives(1);
+			fp = eTest.numFalsePositives(1);
+			fn = eTest.numFalseNegatives(1);
+			precision = eTest.precision(1) * 100;
+			recall = eTest.recall(1) * 100;
+			fscore = eTest.fMeasure(1) * 100;
+			return fscore;
+		} catch (NullPointerException e1) {
+			return -1;
 		}
-		
-		double pr = tp / (tp + fp);
-		double rc = tp / (tp + fn);
+				
+	}
+	
+	public double getPrecision() {
+		return precision;
+	}
+
+	public double getRecall() {
+		return recall;
+	}
+
+	public double getFscore() {
+		return fscore;
+	}
+
+	public void printDetails() {
 		
 		System.out.println("tp = "+tp+"\tfp = "+fp);
 		System.out.println("tn = "+tn+"\tfn = "+fn);
-		System.out.println("pr = "+pr+"\nrc = "+rc);
-		
-		return 2 * pr * rc / (pr + rc);
-		
+		System.out.println("pr% = "+precision+"\nrc% = "+recall);
+		System.out.println("fscore% = "+fscore);
+
 	}
 }

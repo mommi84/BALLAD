@@ -10,12 +10,6 @@ public interface BasicClassifier {
 	
 	public String getDescription();
 	
-	/**
-	 * Compute the f-score of the classification.
-	 * @return f-score in percentage
-	 */
-	public double computeFscore();
-
 	public double getPrecision();
 	
 	public double getRecall();

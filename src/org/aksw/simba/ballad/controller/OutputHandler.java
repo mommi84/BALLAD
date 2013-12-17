@@ -29,12 +29,12 @@ public class OutputHandler {
 	private Join join;
 	private Mapping mapping;
 	private TreeSet<String> labels;
-	TreeSet<Resource> src, tgt;
+	private TreeSet<Resource> src, tgt;
 	private ArrayList<PropertyAlignment> alignments;
 	private HashMap<Integer, ArrayList<Similarity>> simMap = new HashMap<>();
-	CsvWriter testWriter;
-	CsvWriter trainWriter;
-	String trainFile, testFile;
+	private CsvWriter testWriter;
+	private CsvWriter trainWriter;
+	private String trainFile, testFile;
 
 	public OutputHandler(Join join, Mapping mapping) {
 	

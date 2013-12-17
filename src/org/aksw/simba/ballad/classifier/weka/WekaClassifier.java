@@ -1,4 +1,6 @@
-package org.aksw.simba.ballad.classifier;
+package org.aksw.simba.ballad.classifier.weka;
+
+import org.aksw.simba.ballad.classifier.BasicClassifier;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
@@ -62,6 +64,16 @@ public abstract class WekaClassifier implements BasicClassifier {
 		// Print the result à la Weka explorer:
 		String strSummary = eTest.toSummaryString();
 		System.out.println(strSummary);
+
+		// class 1 is "positive"
+		tp = eTest.numTruePositives(1);
+		tn = eTest.numTrueNegatives(1);
+		fp = eTest.numFalsePositives(1);
+		fn = eTest.numFalseNegatives(1);
+		precision = eTest.precision(1) * 100;
+		recall = eTest.recall(1) * 100;
+		fscore = eTest.fMeasure(1) * 100;
+	
 	}
 	
 	private Instances removeFirstAttribute(Instances inst) {
@@ -110,24 +122,6 @@ public abstract class WekaClassifier implements BasicClassifier {
 	public Classifier getcModel() {
 		return cModel;
 	}	
-	
-	public double computeFscore() {
-		
-		try {
-			// class 1 is "positive"
-			tp = eTest.numTruePositives(1);
-			tn = eTest.numTrueNegatives(1);
-			fp = eTest.numFalsePositives(1);
-			fn = eTest.numFalseNegatives(1);
-			precision = eTest.precision(1) * 100;
-			recall = eTest.recall(1) * 100;
-			fscore = eTest.fMeasure(1) * 100;
-			return fscore;
-		} catch (NullPointerException e1) {
-			return -1;
-		}
-				
-	}
 	
 	public double getPrecision() {
 		return precision;

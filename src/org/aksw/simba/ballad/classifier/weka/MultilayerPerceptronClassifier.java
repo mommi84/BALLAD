@@ -1,4 +1,4 @@
-package org.aksw.simba.ballad.classifier;
+package org.aksw.simba.ballad.classifier.weka;
 
 import weka.classifiers.functions.MultilayerPerceptron;
 

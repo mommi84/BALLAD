@@ -1,0 +1,580 @@
+source dataset loaded
+target dataset loaded
+mapping loaded
+properties aligned
+{maxS=3.3016809492935764, minS=3.2997251539756367, minT=3.2997251539756367, maxT=3.3016809492935764}
+output handler ready
+training set ready
+test set ready
+Refreshing GOE props...
+---Registering Weka Editors---
+[KnowledgeFlow] Loading properties and plugins...
+[KnowledgeFlow] Initializing KF...
+
+Correctly Classified Instances       39997               99.9925 %
+Incorrectly Classified Instances         3                0.0075 %
+Kappa statistic                          0.9924
+Mean absolute error                      0.0005
+Root mean squared error                  0.0065
+Relative absolute error                  5.7243 %
+Root relative squared error              9.1693 %
+Coverage of cases (0.95 level)         100      %
+Mean rel. region size (0.95 level)      50.0088 %
+Total Number of Instances            40000     
+
+
+Correctly Classified Instances       39996               99.99   %
+Incorrectly Classified Instances         4                0.01   %
+Kappa statistic                          0.9898
+Mean absolute error                      0.0008
+Root mean squared error                  0.0093
+Relative absolute error                  8.9631 %
+Root relative squared error             13.14   %
+Coverage of cases (0.95 level)         100      %
+Mean rel. region size (0.95 level)      50.125  %
+Total Number of Instances            40000     
+
+
+Correctly Classified Instances       39996               99.99   %
+Incorrectly Classified Instances         4                0.01   %
+Kappa statistic                          0.9898
+Mean absolute error                      0.0007
+Root mean squared error                  0.0108
+Relative absolute error                  6.9065 %
+Root relative squared error             15.3332 %
+Coverage of cases (0.95 level)          99.99   %
+Mean rel. region size (0.95 level)      50.245  %
+Total Number of Instances            40000     
+
+
+Correctly Classified Instances       39987               99.9675 %
+Incorrectly Classified Instances        13                0.0325 %
+Kappa statistic                          0.9682
+Mean absolute error                      0.0003
+Root mean squared error                  0.0178
+Relative absolute error                  3.4173 %
+Root relative squared error             25.1763 %
+Coverage of cases (0.95 level)          99.97   %
+Mean rel. region size (0.95 level)      50.0025 %
+Total Number of Instances            40000     
+
+
+Correctly Classified Instances       39987               99.9675 %
+Incorrectly Classified Instances        13                0.0325 %
+Kappa statistic                          0.9662
+Mean absolute error                      0.0003
+Root mean squared error                  0.018 
+Relative absolute error                  3.446  %
+Root relative squared error             25.5584 %
+Coverage of cases (0.95 level)          99.9675 %
+Mean rel. region size (0.95 level)      50      %
+Total Number of Instances            40000     
+
+
+Correctly Classified Instances       39994               99.985  %
+Incorrectly Classified Instances         6                0.015  %
+Kappa statistic                          0.985 
+Mean absolute error                      0.0001
+Root mean squared error                  0.0117
+Relative absolute error                  1.5834 %
+Root relative squared error             16.5992 %
+Coverage of cases (0.95 level)          99.9875 %
+Mean rel. region size (0.95 level)      50.0025 %
+Total Number of Instances            40000     
+
+*
+optimization finished, #iter = 14
+nu = 1.4953184192285366E-9
+obj = -2.838339502788097, rho = -2.5525965559210384
+nSV = 4, nBSV = 0
+Total nSV = 4
+Linear Support Vector Machines (LibSVM)
+tp = 199.0	fp = 0.0
+tn = 39800.0	fn = 1.0
+pr% = 100.0
+rc% = 99.5
+fscore% = 99.74937343358395
+*
+optimization finished, #iter = 8
+nu = 6.202867835166232E-11
+obj = -0.11778060142626147, rho = -1.3843693750992152
+nSV = 3, nBSV = 0
+Total nSV = 3
+Degree-3 Polynomial Support Vector Machines (LibSVM)
+tp = 198.0	fp = 0.0
+tn = 39800.0	fn = 2.0
+pr% = 100.0
+rc% = 99.0
+fscore% = 99.49748743718592
+
+Correctly Classified Instances       39997               99.9925 %
+Incorrectly Classified Instances         3                0.0075 %
+Kappa statistic                          0.9924
+Mean absolute error                      0.0005
+Root mean squared error                  0.0065
+Relative absolute error                  5.7243 %
+Root relative squared error              9.1693 %
+Coverage of cases (0.95 level)         100      %
+Mean rel. region size (0.95 level)      50.0088 %
+Total Number of Instances            40000     
+
+Sigmoid Node 0
+    Inputs    Weights
+    Threshold    -4.408264615797487
+    Node 2    1.654999261147525
+    Node 3    1.8670222278553856
+    Node 4    1.8894677117861307
+    Node 5    1.9130566413126464
+    Node 6    1.92950248885223
+    Node 7    1.6998156225861585
+    Node 8    1.625666189642868
+Sigmoid Node 1
+    Inputs    Weights
+    Threshold    4.408820770700197
+    Node 2    -1.6996417746391548
+    Node 3    -1.8480769642341075
+    Node 4    -1.8214614674304552
+    Node 5    -1.8917624781530504
+    Node 6    -1.9301534600347712
+    Node 7    -1.6836447507830228
+    Node 8    -1.7070303609683783
+Sigmoid Node 2
+    Inputs    Weights
+    Threshold    -0.3255924928773418
+    Attrib Weighted N-Gram Similarity id::id    0.33667310749114804
+    Attrib Weighted Edit Similarity id::id    0.0722056571140824
+    Attrib Cosine Similarity id::id    -0.02858951949732036
+    Attrib Weighted N-Gram Similarity title::title    -1.4403933645003322
+    Attrib Weighted Edit Similarity title::title    -0.36536945271854815
+    Attrib Cosine Similarity title::title    -0.634945791586677
+    Attrib Weighted N-Gram Similarity authors::authors    -1.1202614153857522
+    Attrib Weighted Edit Similarity authors::authors    -0.02976464784050111
+    Attrib Cosine Similarity authors::authors    -0.8658312610197325
+    Attrib Weighted N-Gram Similarity venue::venue    -0.2123023484677764
+    Attrib Weighted Edit Similarity venue::venue    0.04084744537164378
+    Attrib Cosine Similarity venue::venue    -0.17114748553806902
+    Attrib Numeric Similarity year::year    -0.8123106487282016
+Sigmoid Node 3
+    Inputs    Weights
+    Threshold    -0.3570225701495072
+    Attrib Weighted N-Gram Similarity id::id    0.317641626345494
+    Attrib Weighted Edit Similarity id::id    0.06581555805585469
+    Attrib Cosine Similarity id::id    -0.03195410871796028
+    Attrib Weighted N-Gram Similarity title::title    -1.5331046151087666
+    Attrib Weighted Edit Similarity title::title    -0.34944764681492213
+    Attrib Cosine Similarity title::title    -0.7235559642692843
+    Attrib Weighted N-Gram Similarity authors::authors    -1.1299506647939996
+    Attrib Weighted Edit Similarity authors::authors    -0.05798796140321247
+    Attrib Cosine Similarity authors::authors    -0.9138448415422695
+    Attrib Weighted N-Gram Similarity venue::venue    -0.21734389344412874
+    Attrib Weighted Edit Similarity venue::venue    0.005987726754800286
+    Attrib Cosine Similarity venue::venue    -0.13834827598823993
+    Attrib Numeric Similarity year::year    -0.8400687056108269
+Sigmoid Node 4
+    Inputs    Weights
+    Threshold    -0.3384211600523756
+    Attrib Weighted N-Gram Similarity id::id    0.31132946719572135
+    Attrib Weighted Edit Similarity id::id    0.12016888688859678
+    Attrib Cosine Similarity id::id    0.034852503282593816
+    Attrib Weighted N-Gram Similarity title::title    -1.508457333588141
+    Attrib Weighted Edit Similarity title::title    -0.3668079485789085
+    Attrib Cosine Similarity title::title    -0.7118897526134756
+    Attrib Weighted N-Gram Similarity authors::authors    -1.1473050662510123
+    Attrib Weighted Edit Similarity authors::authors    -0.027444077646148014
+    Attrib Cosine Similarity authors::authors    -0.9410698765190694
+    Attrib Weighted N-Gram Similarity venue::venue    -0.17791168944280458
+    Attrib Weighted Edit Similarity venue::venue    -0.013126572108411989
+    Attrib Cosine Similarity venue::venue    -0.1479518090737369
+    Attrib Numeric Similarity year::year    -0.8391439753123698
+Sigmoid Node 5
+    Inputs    Weights
+    Threshold    -0.3622599906559141
+    Attrib Weighted N-Gram Similarity id::id    0.272445187618856
+    Attrib Weighted Edit Similarity id::id    0.04651443780583443
+    Attrib Cosine Similarity id::id    0.03747605631211727
+    Attrib Weighted N-Gram Similarity title::title    -1.524468923718673
+    Attrib Weighted Edit Similarity title::title    -0.37614610841612844
+    Attrib Cosine Similarity title::title    -0.6791871770520311
+    Attrib Weighted N-Gram Similarity authors::authors    -1.1936959551545665
+    Attrib Weighted Edit Similarity authors::authors    -0.05963066384037624
+    Attrib Cosine Similarity authors::authors    -0.9013312613858999
+    Attrib Weighted N-Gram Similarity venue::venue    -0.23568903842251196
+    Attrib Weighted Edit Similarity venue::venue    0.02700836412427337
+    Attrib Cosine Similarity venue::venue    -0.14271161542028035
+    Attrib Numeric Similarity year::year    -0.8890421427461128
+Sigmoid Node 6
+    Inputs    Weights
+    Threshold    -0.3249075701887441
+    Attrib Weighted N-Gram Similarity id::id    0.29917729068720855
+    Attrib Weighted Edit Similarity id::id    0.09798848849357274
+    Attrib Cosine Similarity id::id    0.003996274649465101
+    Attrib Weighted N-Gram Similarity title::title    -1.567372812134244
+    Attrib Weighted Edit Similarity title::title    -0.4134147372142915
+    Attrib Cosine Similarity title::title    -0.6767983927066276
+    Attrib Weighted N-Gram Similarity authors::authors    -1.1657335221000202
+    Attrib Weighted Edit Similarity authors::authors    -0.054308736249966
+    Attrib Cosine Similarity authors::authors    -0.8998975705637468
+    Attrib Weighted N-Gram Similarity venue::venue    -0.17622410630689272
+    Attrib Weighted Edit Similarity venue::venue    0.04220941080573124
+    Attrib Cosine Similarity venue::venue    -0.20945560772340532
+    Attrib Numeric Similarity year::year    -0.883922957945016
+Sigmoid Node 7
+    Inputs    Weights
+    Threshold    -0.3382698876819905
+    Attrib Weighted N-Gram Similarity id::id    0.30496352724222214
+    Attrib Weighted Edit Similarity id::id    0.11460067180993193
+    Attrib Cosine Similarity id::id    0.007912312154013314
+    Attrib Weighted N-Gram Similarity title::title    -1.4550511432351179
+    Attrib Weighted Edit Similarity title::title    -0.3720430568329489
+    Attrib Cosine Similarity title::title    -0.6386847182829638
+    Attrib Weighted N-Gram Similarity authors::authors    -1.0974025516016386
+    Attrib Weighted Edit Similarity authors::authors    -0.0276278001504921
+    Attrib Cosine Similarity authors::authors    -0.8974901610028154
+    Attrib Weighted N-Gram Similarity venue::venue    -0.17498063199596398
+    Attrib Weighted Edit Similarity venue::venue    0.02248607963712874
+    Attrib Cosine Similarity venue::venue    -0.17604453264367412
+    Attrib Numeric Similarity year::year    -0.821185250542854
+Sigmoid Node 8
+    Inputs    Weights
+    Threshold    -0.36617213094226914
+    Attrib Weighted N-Gram Similarity id::id    0.3190999978940385
+    Attrib Weighted Edit Similarity id::id    0.10958969657705266
+    Attrib Cosine Similarity id::id    -0.04983542771420331
+    Attrib Weighted N-Gram Similarity title::title    -1.484230555305902
+    Attrib Weighted Edit Similarity title::title    -0.32726859944135833
+    Attrib Cosine Similarity title::title    -0.665269993478162
+    Attrib Weighted N-Gram Similarity authors::authors    -1.0820564117055902
+    Attrib Weighted Edit Similarity authors::authors    -0.07134319118606433
+    Attrib Cosine Similarity authors::authors    -0.8389433448728657
+    Attrib Weighted N-Gram Similarity venue::venue    -0.16195110477248825
+    Attrib Weighted Edit Similarity venue::venue    -0.018294354018378936
+    Attrib Cosine Similarity venue::venue    -0.14479104341125465
+    Attrib Numeric Similarity year::year    -0.7859205231175607
+Class negative
+    Input
+    Node 0
+Class positive
+    Input
+    Node 1
+
+tp = 198.0	fp = 1.0
+tn = 39799.0	fn = 2.0
+pr% = 99.49748743718592
+rc% = 99.0
+fscore% = 99.24812030075188
+
+Correctly Classified Instances       39996               99.99   %
+Incorrectly Classified Instances         4                0.01   %
+Kappa statistic                          0.9898
+Mean absolute error                      0.0008
+Root mean squared error                  0.0093
+Relative absolute error                  8.9631 %
+Root relative squared error             13.14   %
+Coverage of cases (0.95 level)         100      %
+Mean rel. region size (0.95 level)      50.125  %
+Total Number of Instances            40000     
+
+Classification via Regression
+
+Classifier for class with index 0:
+
+M5 pruned model tree:
+(using smoothed linear models)
+
+Weighted N-Gram Similarity title::title <= 0.152 : LM1 (3036/0%)
+Weighted N-Gram Similarity title::title >  0.152 : 
+|   Weighted N-Gram Similarity title::title <= 0.239 : LM2 (607/0%)
+|   Weighted N-Gram Similarity title::title >  0.239 : 
+|   |   Weighted N-Gram Similarity title::title <= 0.339 : LM3 (122/0%)
+|   |   Weighted N-Gram Similarity title::title >  0.339 : 
+|   |   |   Weighted N-Gram Similarity title::title <= 0.736 : LM4 (15/0%)
+|   |   |   Weighted N-Gram Similarity title::title >  0.736 : LM5 (16/0%)
+
+LM num: 1
+class = 
+	-0.0023 * Weighted N-Gram Similarity title::title 
+	+ 1.0002
+
+LM num: 2
+class = 
+	-0.0338 * Weighted N-Gram Similarity title::title 
+	+ 1.0058
+
+LM num: 3
+class = 
+	-0.2318 * Weighted N-Gram Similarity title::title 
+	+ 1.0568
+
+LM num: 4
+class = 
+	-0.9982 * Weighted N-Gram Similarity title::title 
+	+ 1.3389
+
+LM num: 5
+class = 
+	-0.9819 * Weighted N-Gram Similarity title::title 
+	+ 1.0216
+
+Number of Rules : 5
+
+Classifier for class with index 1:
+
+M5 pruned model tree:
+(using smoothed linear models)
+
+Weighted N-Gram Similarity title::title <= 0.152 : LM1 (3036/0%)
+Weighted N-Gram Similarity title::title >  0.152 : 
+|   Weighted N-Gram Similarity title::title <= 0.239 : LM2 (607/0%)
+|   Weighted N-Gram Similarity title::title >  0.239 : 
+|   |   Weighted N-Gram Similarity title::title <= 0.339 : LM3 (122/0%)
+|   |   Weighted N-Gram Similarity title::title >  0.339 : 
+|   |   |   Weighted N-Gram Similarity title::title <= 0.736 : LM4 (15/0%)
+|   |   |   Weighted N-Gram Similarity title::title >  0.736 : LM5 (16/0%)
+
+LM num: 1
+class = 
+	0.0023 * Weighted N-Gram Similarity title::title 
+	- 0.0002
+
+LM num: 2
+class = 
+	0.0338 * Weighted N-Gram Similarity title::title 
+	- 0.0058
+
+LM num: 3
+class = 
+	0.2318 * Weighted N-Gram Similarity title::title 
+	- 0.0568
+
+LM num: 4
+class = 
+	0.9982 * Weighted N-Gram Similarity title::title 
+	- 0.3389
+
+LM num: 5
+class = 
+	0.9819 * Weighted N-Gram Similarity title::title 
+	- 0.0216
+
+Number of Rules : 5
+
+
+tp = 196.0	fp = 0.0
+tn = 39800.0	fn = 4.0
+pr% = 100.0
+rc% = 98.0
+fscore% = 98.98989898989899
+
+Correctly Classified Instances       39996               99.99   %
+Incorrectly Classified Instances         4                0.01   %
+Kappa statistic                          0.9898
+Mean absolute error                      0.0007
+Root mean squared error                  0.0108
+Relative absolute error                  6.9065 %
+Root relative squared error             15.3332 %
+Coverage of cases (0.95 level)          99.99   %
+Mean rel. region size (0.95 level)      50.245  %
+Total Number of Instances            40000     
+
+Decision Table:
+
+Number of training instances: 3796
+Number of Rules : 2
+Non matches covered by Majority class.
+	Best first.
+	Start set: no attributes
+	Search direction: forward
+	Stale search after 5 node expansions
+	Total number of subsets evaluated: 68
+	Merit of best subset found:  100    
+Evaluation (for feature selection): CV (leave one out) 
+Feature set: 4,14
+tp = 196.0	fp = 0.0
+tn = 39800.0	fn = 4.0
+pr% = 100.0
+rc% = 98.0
+fscore% = 98.98989898989899
+
+Correctly Classified Instances       39987               99.9675 %
+Incorrectly Classified Instances        13                0.0325 %
+Kappa statistic                          0.9682
+Mean absolute error                      0.0003
+Root mean squared error                  0.0178
+Relative absolute error                  3.4173 %
+Root relative squared error             25.1763 %
+Coverage of cases (0.95 level)          99.97   %
+Mean rel. region size (0.95 level)      50.0025 %
+Total Number of Instances            40000     
+
+Naive Bayes Classifier
+
+                                                 Class
+Attribute                                     negative positive
+                                                   (1)      (0)
+================================================================
+Weighted N-Gram Similarity id::id
+  mean                                           0.0066   0.0038
+  std. dev.                                      0.0212   0.0145
+  weight sum                                       3780       16
+  precision                                       0.005    0.005
+
+Weighted Edit Similarity id::id
+  mean                                           0.0429   0.0421
+  std. dev.                                      0.0067   0.0074
+  weight sum                                       3780       16
+  precision                                       0.002    0.002
+
+Cosine Similarity id::id
+  mean                                                0        0
+  std. dev.                                      0.0017   0.0017
+  weight sum                                       3780       16
+  precision                                        0.01     0.01
+
+Weighted N-Gram Similarity title::title
+  mean                                           0.0983   0.9976
+  std. dev.                                      0.0686   0.0094
+  weight sum                                       3780       16
+  precision                                      0.0009   0.0009
+
+Weighted Edit Similarity title::title
+  mean                                           0.0182   0.4764
+  std. dev.                                      0.0058     0.41
+  weight sum                                       3780       16
+  precision                                      0.0089   0.0089
+
+Cosine Similarity title::title
+  mean                                           0.0438   0.6344
+  std. dev.                                      0.0703   0.3075
+  weight sum                                       3780       16
+  precision                                      0.0063   0.0063
+
+Weighted N-Gram Similarity authors::authors
+  mean                                           0.0319   0.8759
+  std. dev.                                       0.043    0.117
+  weight sum                                       3780       16
+  precision                                      0.0016   0.0016
+
+Weighted Edit Similarity authors::authors
+  mean                                           0.0246   0.2733
+  std. dev.                                      0.0139     0.42
+  weight sum                                       3780       16
+  precision                                      0.0062   0.0062
+
+Cosine Similarity authors::authors
+  mean                                           0.0082   0.7567
+  std. dev.                                      0.0402   0.1948
+  weight sum                                       3780       16
+  precision                                      0.0108   0.0108
+
+Weighted N-Gram Similarity venue::venue
+  mean                                             0.11   0.3143
+  std. dev.                                      0.1774   0.2539
+  weight sum                                       3780       16
+  precision                                      0.0524   0.0524
+
+Weighted Edit Similarity venue::venue
+  mean                                           0.0507   0.0892
+  std. dev.                                      0.0374   0.0643
+  weight sum                                       3780       16
+  precision                                      0.0085   0.0085
+
+Cosine Similarity venue::venue
+  mean                                           0.1326   0.3878
+  std. dev.                                      0.2335   0.3506
+  weight sum                                       3780       16
+  precision                                      0.1633   0.1633
+
+Numeric Similarity year::year
+  mean                                           0.3761        1
+  std. dev.                                      0.3292   0.0037
+  weight sum                                       3780       16
+  precision                                      0.0222   0.0222
+
+
+tp = 199.0	fp = 12.0
+tn = 39788.0	fn = 1.0
+pr% = 94.3127962085308
+rc% = 99.5
+fscore% = 96.83698296836982
+
+Correctly Classified Instances       39987               99.9675 %
+Incorrectly Classified Instances        13                0.0325 %
+Kappa statistic                          0.9662
+Mean absolute error                      0.0003
+Root mean squared error                  0.018 
+Relative absolute error                  3.446  %
+Root relative squared error             25.5584 %
+Coverage of cases (0.95 level)          99.9675 %
+Mean rel. region size (0.95 level)      50      %
+Total Number of Instances            40000     
+
+
+RandomTree
+==========
+
+Weighted Edit Similarity title::title < 0.08 : negative (3780/0)
+Weighted Edit Similarity title::title >= 0.08 : positive (16/0)
+
+Size of the tree : 3
+tp = 187.0	fp = 0.0
+tn = 39800.0	fn = 13.0
+pr% = 100.0
+rc% = 93.5
+fscore% = 96.64082687338501
+
+Correctly Classified Instances       39994               99.985  %
+Incorrectly Classified Instances         6                0.015  %
+Kappa statistic                          0.985 
+Mean absolute error                      0.0001
+Root mean squared error                  0.0117
+Relative absolute error                  1.5834 %
+Root relative squared error             16.5992 %
+Coverage of cases (0.95 level)          99.9875 %
+Mean rel. region size (0.95 level)      50.0025 %
+Total Number of Instances            40000     
+
+Logistic Regression with ridge parameter of 1.0E-8
+Coefficients...
+                                                               Class
+Variable                                                    negative
+====================================================================
+Weighted N-Gram Similarity id::id                           -49.6927
+Weighted Edit Similarity id::id                             143.5907
+Weighted N-Gram Similarity title::title                     -91.6706
+Weighted Edit Similarity title::title                       -45.2033
+Cosine Similarity title::title                               76.6339
+Weighted N-Gram Similarity authors::authors                  31.1855
+Weighted Edit Similarity authors::authors                   -51.7711
+Cosine Similarity authors::authors                          -79.5512
+Weighted N-Gram Similarity venue::venue                      -8.4348
+Weighted Edit Similarity venue::venue                         -6.161
+Cosine Similarity venue::venue                               -0.1638
+Numeric Similarity year::year                                -3.5113
+Intercept                                                     56.345
+
+
+Odds Ratios...
+                                                               Class
+Variable                                                    negative
+====================================================================
+Weighted N-Gram Similarity id::id                                  0
+Weighted Edit Similarity id::id                2.2942058508746264E62
+Weighted N-Gram Similarity title::title                            0
+Weighted Edit Similarity title::title                              0
+Cosine Similarity title::title                 1.9129371889582116E33
+Weighted N-Gram Similarity authors::authors     3.496841850601516E13
+Weighted Edit Similarity authors::authors                          0
+Cosine Similarity authors::authors                                 0
+Weighted N-Gram Similarity venue::venue                       0.0002
+Weighted Edit Similarity venue::venue                         0.0021
+Cosine Similarity venue::venue                                0.8489
+Numeric Similarity year::year                                 0.0299
+
+tp = 198.0	fp = 4.0
+tn = 39796.0	fn = 2.0
+pr% = 98.01980198019803
+rc% = 99.0
+fscore% = 98.50746268656717
+
+========== ACCURACY ===========
+99.74937343358395	99.49748743718592	99.24812030075188	98.98989898989899	98.98989898989899	96.83698296836982	96.64082687338501	98.50746268656717	

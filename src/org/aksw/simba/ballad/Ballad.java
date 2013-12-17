@@ -1,15 +1,18 @@
 package org.aksw.simba.ballad;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import org.aksw.simba.ballad.classifier.BasicClassifier;
-import org.aksw.simba.ballad.classifier.DecisionTableClassifier;
-import org.aksw.simba.ballad.classifier.LinearSvmClassifier;
-import org.aksw.simba.ballad.classifier.LogisticClassifier;
-import org.aksw.simba.ballad.classifier.MultilayerPerceptronClassifier;
-import org.aksw.simba.ballad.classifier.NaiveBayesClassifier;
-import org.aksw.simba.ballad.classifier.RandomTreeClassifier;
-import org.aksw.simba.ballad.classifier.WekaClassifier;
+import org.aksw.simba.ballad.classifier.svm.PolySvmClassifier;
+import org.aksw.simba.ballad.classifier.svm.SvmClassifier;
+import org.aksw.simba.ballad.classifier.weka.DecisionTableClassifier;
+import org.aksw.simba.ballad.classifier.weka.LogisticClassifier;
+import org.aksw.simba.ballad.classifier.weka.MultilayerPerceptronClassifier;
+import org.aksw.simba.ballad.classifier.weka.NaiveBayesClassifier;
+import org.aksw.simba.ballad.classifier.weka.RandomTreeClassifier;
+import org.aksw.simba.ballad.classifier.weka.WekaClassifier;
+import org.aksw.simba.ballad.controller.ClassifierHandler;
 import org.aksw.simba.ballad.controller.CsvLoader;
 import org.aksw.simba.ballad.controller.OutputHandler;
 import org.aksw.simba.ballad.controller.PropertyAligner;
@@ -66,12 +69,9 @@ public class Ballad {
 		oh.computeTestSet(false);
 		System.out.println("test set ready");
 		
-		// train classifier
-		BasicClassifier classifier = new LinearSvmClassifier( //DecisionTableClassifier( //MultilayerPerceptronClassifier(
-				oh.getTrainFile(), oh.getTestFile());
-		System.out.println(classifier.getDescription());
-		classifier.computeFscore();
-		classifier.printDetails();
+		// train classifiers
+		ClassifierHandler.trainAll(oh);
+		
 	}
 
 }

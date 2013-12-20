@@ -157,9 +157,9 @@ public class OutputHandler {
 			}
 		}
 		
-		// add label
-		int label = labels.contains(l.getId()) ? 1 : 0;
-		out += "#" + label;
+		// add class
+		String clax = labels.contains(l.getId()) ? "positive" : "negative";
+		out += "#" + clax;
 		
 		return out;
 	}

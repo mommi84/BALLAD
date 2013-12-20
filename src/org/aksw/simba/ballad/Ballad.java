@@ -1,17 +1,7 @@
 package org.aksw.simba.ballad;
 
 import java.io.File;
-import java.util.ArrayList;
 
-import org.aksw.simba.ballad.classifier.BasicClassifier;
-import org.aksw.simba.ballad.classifier.svm.PolySvmClassifier;
-import org.aksw.simba.ballad.classifier.svm.SvmClassifier;
-import org.aksw.simba.ballad.classifier.weka.DecisionTableClassifier;
-import org.aksw.simba.ballad.classifier.weka.LogisticClassifier;
-import org.aksw.simba.ballad.classifier.weka.MultilayerPerceptronClassifier;
-import org.aksw.simba.ballad.classifier.weka.NaiveBayesClassifier;
-import org.aksw.simba.ballad.classifier.weka.RandomTreeClassifier;
-import org.aksw.simba.ballad.classifier.weka.WekaClassifier;
 import org.aksw.simba.ballad.controller.ClassifierHandler;
 import org.aksw.simba.ballad.controller.CsvLoader;
 import org.aksw.simba.ballad.controller.OutputHandler;

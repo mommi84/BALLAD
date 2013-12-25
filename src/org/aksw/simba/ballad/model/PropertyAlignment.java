@@ -12,9 +12,9 @@ public class PropertyAlignment {
 	
 	private String name;
 	private int type;
-	private ArrayList<Property> sourceProperties = new ArrayList<>();
-	private ArrayList<Property> targetProperties = new ArrayList<>();
-	private ArrayList<Similarity> similarities = new ArrayList<>();
+	private ArrayList<Property> sourceProperties = new ArrayList<Property>();
+	private ArrayList<Property> targetProperties = new ArrayList<Property>();
+	private ArrayList<Similarity> similarities = new ArrayList<Similarity>();
 	
 	public PropertyAlignment(String name, int type) {
 		this.name = name;

@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class Resource implements Comparable<Resource> {
 
 	private String id;
-	private HashMap<Property, String> attr = new HashMap<>();
+	private HashMap<Property, String> attr = new HashMap<Property, String>();
 
 	public Resource(String id) {
 		super();

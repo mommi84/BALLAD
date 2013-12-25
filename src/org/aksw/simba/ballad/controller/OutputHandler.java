@@ -25,13 +25,13 @@ import org.aksw.simba.ballad.similarity.WeightedNgramSimilarity;
 public class OutputHandler {
 
 	public static final double SELECTION_RATE = 0.1;
-	private static TreeSet<Link> trainingSet = new TreeSet<>();
+	private static TreeSet<Link> trainingSet = new TreeSet<Link>();
 	private Join join;
 	private Mapping mapping;
 	private TreeSet<String> labels;
 	private TreeSet<Resource> src, tgt;
 	private ArrayList<PropertyAlignment> alignments;
-	private HashMap<Integer, ArrayList<Similarity>> simMap = new HashMap<>();
+	private HashMap<Integer, ArrayList<Similarity>> simMap = new HashMap<Integer, ArrayList<Similarity>>();
 	private CsvWriter testWriter;
 	private CsvWriter trainWriter;
 	private String trainFile, testFile;
@@ -50,12 +50,12 @@ public class OutputHandler {
 		testFile = "features/"+join.getSetting()+"_test.features.csv";
 		
 		// TODO load these from config file
-		ArrayList<Similarity> stringSims = new ArrayList<>();
+		ArrayList<Similarity> stringSims = new ArrayList<Similarity>();
 		stringSims.add(new WeightedNgramSimilarity(3));
 		stringSims.add(new WeightedEditSimilarity());
 		stringSims.add(new CosineSimilarity());
 		simMap.put(Property.TYPE_STRING, stringSims);
-		ArrayList<Similarity> numSims = new ArrayList<>();
+		ArrayList<Similarity> numSims = new ArrayList<Similarity>();
 		numSims.add(new NumericSimilarity());
 		simMap.put(Property.TYPE_NUM, numSims);
 		simMap.put(Property.TYPE_DATE, new ArrayList<Similarity>());
@@ -63,8 +63,8 @@ public class OutputHandler {
 		// collect random link IDs for training set
 		Dataset source = join.getSource();
 		Dataset target = join.getTarget();
-		ArrayList<Resource> srcList = new ArrayList<>(source.getResources());
-		ArrayList<Resource> tgtList = new ArrayList<>(target.getResources());
+		ArrayList<Resource> srcList = new ArrayList<Resource>(source.getResources());
+		ArrayList<Resource> tgtList = new ArrayList<Resource>(target.getResources());
 		int selSize = (int) (srcList.size() * tgtList.size() * SELECTION_RATE);
 		for (int i = 0; i < selSize; i++) {
 			Resource s = srcList.get((int) (Math.random() * srcList.size()));

@@ -18,7 +18,7 @@ public class Labeller {
 		TreeSet<String> labels = mapping.getLabels();
 		
 		// index links and set default
-		HashMap<String, Link> index = new HashMap<>();
+		HashMap<String, Link> index = new HashMap<String, Link>();
 		for(Link l : links) {
 			index.put(l.getId(), l);
 			l.setLabel(Link.LABEL_NO);

@@ -1,0 +1,1 @@
+java -Xmx6G -cp bin/:lib/* org.aksw.simba.ballad.Ballad "dblp-acm" > dblp-acm.txt

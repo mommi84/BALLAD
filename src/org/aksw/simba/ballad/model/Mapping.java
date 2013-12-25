@@ -16,7 +16,7 @@ public class Mapping {
 
 	private String name;
 	private File file;
-	private TreeSet<String> labels = new TreeSet<>();
+	private TreeSet<String> labels = new TreeSet<String>();
 
 	public Mapping(String name, File file) {
 		super();

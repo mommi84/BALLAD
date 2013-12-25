@@ -21,7 +21,7 @@ public class ClassifierHandler {
 	/**
 	 * The list of classifiers to evaluate.
 	 */
-	private static ArrayList<BasicClassifier> cs = new ArrayList<>();
+	private static ArrayList<BasicClassifier> cs = new ArrayList<BasicClassifier>();
 	
 	/**
 	 * Train all classifiers.

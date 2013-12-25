@@ -18,8 +18,8 @@ public class Dataset {
 	private String url;
 	private File file;
 
-	private TreeSet<Resource> resources = new TreeSet<>();
-	private ArrayList<Property> properties = new ArrayList<>();
+	private TreeSet<Resource> resources = new TreeSet<Resource>();
+	private ArrayList<Property> properties = new ArrayList<Property>();
 
 	public Dataset(String status, String name, String url, File file) {
 		super();

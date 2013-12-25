@@ -12,7 +12,7 @@ public class Join {
 	private Dataset source;
 	private Dataset target;
 	private String setting;
-	private ArrayList<PropertyAlignment> propertyAlignments = new ArrayList<>();
+	private ArrayList<PropertyAlignment> propertyAlignments = new ArrayList<PropertyAlignment>();
 
 	public Join(Dataset source, Dataset target, String setting) {
 		super();

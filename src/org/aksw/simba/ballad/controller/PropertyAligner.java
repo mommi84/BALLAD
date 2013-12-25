@@ -22,7 +22,7 @@ public class PropertyAligner {
 		String[] spa = Bundle.getString("source_property_align").split(",");
 		String[] tpa = Bundle.getString("target_property_align").split(",");
 		
-		HashMap<Integer, PropertyAlignment> index = new HashMap<>();
+		HashMap<Integer, PropertyAlignment> index = new HashMap<Integer, PropertyAlignment>();
 		
 		// create alignments and link source properties
 		for(String strS : spa) {

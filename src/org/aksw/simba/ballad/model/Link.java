@@ -16,7 +16,7 @@ public class Link implements Comparable<Link> {
 
 	private Resource source;
 	private Resource target;
-	private HashMap<PropertyAlignment, Double> similarities = new HashMap<>();
+	private HashMap<PropertyAlignment, Double> similarities = new HashMap<PropertyAlignment, Double>();
 	private int label = UNLABELLED;
 
 	public Link(Resource source, Resource target) {

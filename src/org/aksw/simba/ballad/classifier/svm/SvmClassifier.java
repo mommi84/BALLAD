@@ -64,7 +64,12 @@ public abstract class SvmClassifier implements BasicClassifier {
 				for (int j = 1; j < nextLine.length - 1; j++) {
 					x[i][j-1] = new svm_node();
 					x[i][j-1].index = j-1;
-					x[i][j-1].value = Double.parseDouble(nextLine[j]);
+					double val = Double.parseDouble(nextLine[j]);
+					// SVM cannot handle NaN values
+					if(Double.isNaN(val))
+						x[i][j-1].value = 0;
+					else
+						x[i][j-1].value = val;
 				}
 				y[i] = toDouble(nextLine[nextLine.length - 1]);
 			}
@@ -104,7 +109,12 @@ public abstract class SvmClassifier implements BasicClassifier {
 				for (int j = 1; j < nextLine.length - 1; j++) {
 					instance[j-1] = new svm_node();
 					instance[j-1].index = j-1;
-					instance[j-1].value = Double.parseDouble(nextLine[j]);
+					double val = Double.parseDouble(nextLine[j]);
+					// SVM cannot handle NaN values
+					if(Double.isNaN(val))
+						instance[j-1].value = 0;
+					else
+						instance[j-1].value = val;
 				}
 				double theoretic = toDouble(nextLine[nextLine.length - 1]);
 				double predicted = svm.svm_predict(model, instance);
@@ -125,9 +135,9 @@ public abstract class SvmClassifier implements BasicClassifier {
 			e.printStackTrace();
 		}
 		
-		precision = tp / (tp+fp) * 100.0;
-		recall = tp / (tp+fn) * 100.0;
-		fscore = 2 * precision * recall / (precision + recall);
+		precision = (tp+fp == 0) ? 0.0 : tp / (tp+fp) * 100.0;
+		recall = (tp+fp == 0) ? 0.0 : tp / (tp+fn) * 100.0;
+		fscore = (precision+recall == 0) ? 0.0 : 2 * precision * recall / (precision + recall);
 		
 	}
 
@@ -176,12 +186,14 @@ public abstract class SvmClassifier implements BasicClassifier {
 	}
 
 	@Override
-	public void printDetails() {
-
-		System.out.println("tp = " + tp + "\tfp = " + fp);
-		System.out.println("tn = " + tn + "\tfn = " + fn);
-		System.out.println("pr% = " + precision + "\nrc% = " + recall);
-		System.out.println("fscore% = " + fscore);
+	public String getDetails() {
+		
+		String details = "";
+		details += "tp = " + tp + "\tfp = " + fp + "\n";
+		details += "tn = " + tn + "\tfn = " + fn + "\n";
+		details += "pr% = " + precision + "\nrc% = " + recall + "\n";
+		details += "fscore% = " + fscore;
+		return details;
 
 	}
 

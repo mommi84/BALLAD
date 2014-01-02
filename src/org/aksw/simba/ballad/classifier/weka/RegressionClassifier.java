@@ -11,7 +11,7 @@ public class RegressionClassifier extends WekaClassifier {
 	public RegressionClassifier(String trainFile, String testFile) {
 		super(trainFile, testFile);
 
-		this.cModel = new ClassificationViaRegression();
+		this.cmodel = new ClassificationViaRegression();
 		run();
 
 	}

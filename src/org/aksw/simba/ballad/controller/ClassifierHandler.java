@@ -19,9 +19,9 @@ import org.aksw.simba.ballad.classifier.weka.RegressionClassifier;
 public class ClassifierHandler {
 
 	/**
-	 * The list of classifiers to evaluate.
+	 * The list of f-scores.
 	 */
-	private static ArrayList<BasicClassifier> cs = new ArrayList<BasicClassifier>();
+	private static ArrayList<Double> fscores = new ArrayList<Double>();
 	
 	/**
 	 * Train all classifiers.
@@ -32,27 +32,24 @@ public class ClassifierHandler {
 		String trainFile = oh.getTrainFile();
 		String testFile = oh.getTestFile();
 		
-		cs.add(new LinearSvmClassifier(trainFile, testFile));
-		cs.add(new PolySvmClassifier(trainFile, testFile));
-		cs.add(new MultilayerPerceptronClassifier(trainFile, testFile));
-		cs.add(new RegressionClassifier(trainFile, testFile));
-		cs.add(new DecisionTableClassifier(trainFile, testFile));
-		cs.add(new NaiveBayesClassifier(trainFile, testFile));
-		cs.add(new RandomTreeClassifier(trainFile, testFile));
-		cs.add(new LogisticClassifier(trainFile, testFile));
-		
-		for(BasicClassifier c : cs) {
-			c.run();
-			System.out.println(c.getDescription());
-			c.printDetails();
-		}
+		train(new LinearSvmClassifier(trainFile, testFile));
+		train(new PolySvmClassifier(trainFile, testFile));
+		train(new MultilayerPerceptronClassifier(trainFile, testFile));
+		train(new RegressionClassifier(trainFile, testFile));
+		train(new DecisionTableClassifier(trainFile, testFile));
+		train(new NaiveBayesClassifier(trainFile, testFile));
+		train(new RandomTreeClassifier(trainFile, testFile));
+		train(new LogisticClassifier(trainFile, testFile));
 		
 		System.out.println("\n========== ACCURACY ===========");
-		for(BasicClassifier c : cs) {
-			System.out.print(c.getFscore() + "\t");
-		}
+		for(Double d : fscores)
+			System.out.print(d + "\t");
 		
-		
+	}
+
+	public static void train(BasicClassifier bc) {
+		System.out.println(bc.getDescription() + "\n" + bc.getDetails());
+		fscores.add(bc.getFscore());
 	}
 	
 }

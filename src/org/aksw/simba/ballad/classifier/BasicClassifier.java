@@ -16,6 +16,6 @@ public interface BasicClassifier {
 	
 	public double getFscore();
 	
-	public void printDetails();
+	public String getDetails();
 
 }

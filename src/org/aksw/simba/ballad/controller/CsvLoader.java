@@ -25,7 +25,8 @@ public class CsvLoader implements Loader {
 		String[] titles = reader.readNext(); // gets the column titles
 		ArrayList<Property> props = new ArrayList<Property>();
 		for(int i=0; i<titles.length; i++) {
-			Property p = new Property(titles[i], Bundle.getArrayValue(d.getStatus() + "_types", i));
+			int type = Bundle.getArrayValue(d.getStatus() + "_types", i);
+			Property p = new Property(titles[i], type);
 			props.add(p);
 			d.addProperty(p);
 		}

@@ -9,6 +9,11 @@ import java.util.regex.Pattern;
  */
 public class ValueParser {
 
+	/**
+	 * Find the double value in a string.
+	 * @param s the input string
+	 * @return the double value
+	 */
 	public static double parse(String s) {
 		if(s.equals(""))
 			return Double.NaN;

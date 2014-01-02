@@ -10,6 +10,7 @@ public class Property implements Comparable<Property> {
 	public static final int TYPE_STRING = 0;
 	public static final int TYPE_NUM = 1;
 	public static final int TYPE_DATE = 2;
+	public static final int TYPE_NODE = 3;
 	private String name;
 	private int type;
 	private PropertyAlignment propertyAlignment;

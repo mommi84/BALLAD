@@ -11,7 +11,7 @@ public class NaiveBayesClassifier extends WekaClassifier {
 	public NaiveBayesClassifier(String trainFile, String testFile) {
 		super(trainFile, testFile);
 
-		this.cModel = new NaiveBayes();
+		this.cmodel = new NaiveBayes();
 		run();
 
 	}

@@ -7,7 +7,7 @@ public class RandomTreeClassifier extends WekaClassifier {
 	public RandomTreeClassifier(String trainFile, String testFile) {
 		super(trainFile, testFile);
 		
-		this.cModel = new RandomTree();
+		this.cmodel = new RandomTree();
 		run();
 
 	}

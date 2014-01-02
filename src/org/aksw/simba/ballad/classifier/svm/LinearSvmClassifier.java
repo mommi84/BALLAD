@@ -11,6 +11,7 @@ public class LinearSvmClassifier extends SvmClassifier {
 	public LinearSvmClassifier(String trainFile, String testFile) {
 		super(trainFile, testFile);
 		kernelType = svm_parameter.LINEAR;
+		run();
 	}
 
 	@Override

@@ -37,10 +37,14 @@ public class PropertyAligner {
 		}
 		
 		// link target properties
-		for(String strT : tpa) {
+		for(int i=0; i<tpa.length; i++) {
+			String strT = tpa[i];
 			int indexT = Integer.parseInt(strT);
-			if(index.containsKey(indexT))
-				index.get(indexT).addTargetProperty(target.getProperty(indexT));
+			if(index.containsKey(indexT)) {
+				index.get(indexT).addTargetProperty(target.getProperty(i));
+				System.out.println(index.get(indexT).getSourceProperties().get(0).getName() + " linked " +
+						index.get(indexT).getTargetProperties().get(0).getName());
+			}
 		}
 		
 		for(Integer i : index.keySet()) {

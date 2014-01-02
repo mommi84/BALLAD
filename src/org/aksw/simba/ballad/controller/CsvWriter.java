@@ -36,7 +36,7 @@ public class CsvWriter {
 	 * @param string a dash-separated string
 	 */
 	public void write(String string) {
-		String[] entries = string.split("#");
+		String[] entries = string.split("\t");
 		writer.writeNext(entries);
 	}
 

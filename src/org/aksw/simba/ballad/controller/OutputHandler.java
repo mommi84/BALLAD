@@ -13,7 +13,8 @@ import org.aksw.simba.ballad.model.Property;
 import org.aksw.simba.ballad.model.PropertyAlignment;
 import org.aksw.simba.ballad.model.Resource;
 import org.aksw.simba.ballad.similarity.CosineSimilarity;
-import org.aksw.simba.ballad.similarity.NumericSimilarity;
+import org.aksw.simba.ballad.similarity.DateSimilarity;
+import org.aksw.simba.ballad.similarity.LogarithmicSimilarity;
 import org.aksw.simba.ballad.similarity.Similarity;
 import org.aksw.simba.ballad.similarity.WeightedEditSimilarity;
 import org.aksw.simba.ballad.similarity.WeightedNgramSimilarity;
@@ -56,9 +57,13 @@ public class OutputHandler {
 		stringSims.add(new CosineSimilarity());
 		simMap.put(Property.TYPE_STRING, stringSims);
 		ArrayList<Similarity> numSims = new ArrayList<Similarity>();
-		numSims.add(new NumericSimilarity());
+		numSims.add(new LogarithmicSimilarity());
 		simMap.put(Property.TYPE_NUM, numSims);
-		simMap.put(Property.TYPE_DATE, new ArrayList<Similarity>());
+		ArrayList<Similarity> dateSims = new ArrayList<Similarity>();
+		dateSims.add(new DateSimilarity());
+		simMap.put(Property.TYPE_DATE, dateSims);
+		// TODO type node not yet implemented
+		simMap.put(Property.TYPE_NODE, new ArrayList<Similarity>());
 		
 		// collect random link IDs for training set
 		Dataset source = join.getSource();
@@ -84,8 +89,10 @@ public class OutputHandler {
 			int type = p.getType();
 			for(Similarity sim : simMap.get(type)) {
 				// TODO .prepare method
-				if(sim instanceof NumericSimilarity)
-					((NumericSimilarity) sim).computeExtrema(join, p);
+				if(sim instanceof LogarithmicSimilarity)
+					((LogarithmicSimilarity) sim).computeExtrema(join, p);
+				if(sim instanceof DateSimilarity)
+					((DateSimilarity) sim).computeExtrema(join, p);
 				p.addSimilarity(sim);
 			}
 				
@@ -94,29 +101,32 @@ public class OutputHandler {
 
 	public void computeTrainingSet(boolean forceOverwrite) {
 		
-		if(new File(trainFile).isFile())
+		if(new File(trainFile).isFile() && !forceOverwrite)
 			return;
 		
 		trainWriter = new CsvWriter(trainFile);
 		trainWriter.write(buildTitleString());
 		
-		// saves training set
+		// save training set
 		for(Link l : trainingSet)
 			trainWriter.write(buildOutString(l));
 		
 		trainWriter.close();
 	
+		// TODO save extrema for numeric/date values
 	}
 
 	public void computeTestSet(boolean forceOverwrite) {
 		
-		if(new File(testFile).isFile())
+		if(new File(testFile).isFile() && !forceOverwrite)
 			return;
+		
+		// TODO load extrema for numeric/date values
 		
 		testWriter = new CsvWriter(testFile);
 		testWriter.write(buildTitleString());
 		
-		// saves test set
+		// save test set
 		for (Resource s : src)
 			for (Resource t : tgt)
 				testWriter.write(buildOutString(new Link(s, t)));
@@ -127,10 +137,10 @@ public class OutputHandler {
 
 	private String buildTitleString() {
 		
-		String out = "id#";
+		String out = "id\t";
 		for (PropertyAlignment pa : alignments)
 			for(Similarity sim : pa.getSimilarities())
-				out += sim.getName()+" "+pa.getName()+"#";
+				out += sim.getName()+" "+pa.getName()+"\t";
 		out += "class";
 		
 		return out;
@@ -153,13 +163,13 @@ public class OutputHandler {
 				String term1 = s.getPropertyValue(pa.getSourceProperties().get(0));
 				String term2 = t.getPropertyValue(pa.getTargetProperties().get(0));
 				Double val = sim.compute(term1, term2);
-				out += "#" + val;
+				out += "\t" + val;
 			}
 		}
 		
 		// add class
 		String clax = labels.contains(l.getId()) ? "positive" : "negative";
-		out += "#" + clax;
+		out += "\t" + clax;
 		
 		return out;
 	}

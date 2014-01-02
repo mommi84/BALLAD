@@ -7,7 +7,7 @@ public class DecisionTableClassifier extends WekaClassifier {
 	public DecisionTableClassifier(String trainFile, String testFile) {
 		super(trainFile, testFile);
 		
-		this.cModel = new DecisionTable();
+		this.cmodel = new DecisionTable();
 		run();
 
 	}

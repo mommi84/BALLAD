@@ -19,13 +19,12 @@ public abstract class WekaClassifier implements BasicClassifier {
 	private String testFile;
 	private double tp = 0, fp = 0, tn = 0, fn = 0, precision, recall, fscore;
 	
-	protected Classifier cModel;
+	protected Classifier cmodel;
 	
 	private Evaluation eTest;
 	private int classIndex;
 	private Instances train, test;
 	private DataSource trainds, testds;
-
 	
 	public WekaClassifier(String trainFile, String testFile) {
 		
@@ -35,23 +34,30 @@ public abstract class WekaClassifier implements BasicClassifier {
 	}
 	
 	public void run() {
-
+		
+		boolean isUpsideDown;
+		
 		try {
-						
+			
 			trainds = new DataSource(trainFile);
 			train = removeFirstAttribute( trainds.getDataSet() );
-			classIndex = train.numAttributes()-1;
-			train.setClassIndex(classIndex);
-			
 			testds = new DataSource(testFile);
 			test = removeFirstAttribute( testds.getDataSet() );
+			
+			classIndex = train.numAttributes()-1;
+			train.setClassIndex(classIndex);
 			test.setClassIndex(classIndex);
-
-			cModel.buildClassifier(train);
+			
+			String firstTrain = (String) train.attribute(classIndex).enumerateValues().nextElement();
+			String firstTest = (String) test.attribute(classIndex).enumerateValues().nextElement();
+			
+			isUpsideDown = !firstTrain.equals(firstTest);
+			
+			cmodel.buildClassifier(train);
 			
 			// Test the model
 			eTest = new Evaluation(train);
-			eTest.evaluateModel(cModel, test);
+			eTest.evaluateModel(cmodel, test);
 			
 		} catch (Exception e) {
 			
@@ -62,17 +68,27 @@ public abstract class WekaClassifier implements BasicClassifier {
 		}
 		
 		// Print the result à la Weka explorer:
-		String strSummary = eTest.toSummaryString();
-		System.out.println(strSummary);
+		System.out.println(eTest.toSummaryString());
 
 		// class 1 is "positive"
-		tp = eTest.numTruePositives(1);
-		tn = eTest.numTrueNegatives(1);
-		fp = eTest.numFalsePositives(1);
-		fn = eTest.numFalseNegatives(1);
-		precision = eTest.precision(1) * 100;
-		recall = eTest.recall(1) * 100;
-		fscore = eTest.fMeasure(1) * 100;
+		int posClass = 1;
+		if(!isUpsideDown) {
+			tp = eTest.numTruePositives(posClass);
+			tn = eTest.numTrueNegatives(posClass);
+			fp = eTest.numFalsePositives(posClass);
+			fn = eTest.numFalseNegatives(posClass);
+			precision = eTest.precision(posClass) * 100;
+			recall = eTest.recall(posClass) * 100;
+			fscore = eTest.fMeasure(posClass) * 100;
+		} else {
+			fp = eTest.numTruePositives(posClass);
+			fn = eTest.numTrueNegatives(posClass);
+			tp = eTest.numFalsePositives(posClass);
+			tn = eTest.numFalseNegatives(posClass);
+			precision = (tp+fp == 0) ? 0.0 : tp / (tp+fp) * 100.0;
+			recall = (tp+fp == 0) ? 0.0 : tp / (tp+fn) * 100.0;
+			fscore = (precision+recall == 0) ? 0.0 : 2 * precision * recall / (precision + recall);
+		}
 	
 	}
 	
@@ -116,11 +132,11 @@ public abstract class WekaClassifier implements BasicClassifier {
 	}
 
 	public String getDescription() {
-		return cModel.toString();
+		return cmodel.toString();
 	}
 
-	public Classifier getcModel() {
-		return cModel;
+	public Classifier getClassifierModel() {
+		return cmodel;
 	}	
 	
 	public double getPrecision() {
@@ -135,12 +151,14 @@ public abstract class WekaClassifier implements BasicClassifier {
 		return fscore;
 	}
 
-	public void printDetails() {
+	public String getDetails() {
 		
-		System.out.println("tp = "+tp+"\tfp = "+fp);
-		System.out.println("tn = "+tn+"\tfn = "+fn);
-		System.out.println("pr% = "+precision+"\nrc% = "+recall);
-		System.out.println("fscore% = "+fscore);
+		String details = "";
+		details += "tp = " + tp + "\tfp = " + fp + "\n";
+		details += "tn = " + tn + "\tfn = " + fn + "\n";
+		details += "pr% = " + precision + "\nrc% = " + recall + "\n";
+		details += "fscore% = " + fscore;
+		return details;
 
 	}
 }

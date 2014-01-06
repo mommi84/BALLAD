@@ -12,7 +12,6 @@ public class NaiveBayesClassifier extends WekaClassifier {
 		super(trainFile, testFile);
 
 		this.cmodel = new NaiveBayes();
-		run();
 
 	}
 

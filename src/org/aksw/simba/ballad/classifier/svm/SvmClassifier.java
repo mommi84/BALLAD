@@ -28,6 +28,7 @@ public abstract class SvmClassifier implements BasicClassifier {
 	
 	private svm_problem problem;
 	private svm_model model;
+	private svm_parameter parameter;
 	
 	protected int kernelType;
 	protected int degree;
@@ -36,7 +37,20 @@ public abstract class SvmClassifier implements BasicClassifier {
 
 		this.setTrainFile(trainFile);
 		this.setTestFile(testFile);
+		
+		parameter = new svm_parameter();
+		// default values
+		parameter.C = 1E+6;
+		parameter.eps = 1E-3;
+		
+	}
+	
+	public void setC(double val) {
+		parameter.C = val;
+	}
 
+	public void setEps(double val) {
+		parameter.eps = val;
 	}
 
 	@Override
@@ -84,11 +98,8 @@ public abstract class SvmClassifier implements BasicClassifier {
 		problem.l = size;
 		problem.x = x;
 		problem.y = y;
-		svm_parameter parameter = new svm_parameter();
 		parameter.svm_type = svm_parameter.C_SVC;
 		parameter.kernel_type = kernelType;
-		parameter.eps = 1E-3;
-		parameter.C = 1E+6;
 		parameter.gamma = 1;
 		
 		if(kernelType == svm_parameter.POLY)

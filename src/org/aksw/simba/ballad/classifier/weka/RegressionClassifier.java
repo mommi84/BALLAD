@@ -12,7 +12,6 @@ public class RegressionClassifier extends WekaClassifier {
 		super(trainFile, testFile);
 
 		this.cmodel = new ClassificationViaRegression();
-		run();
 
 	}
 

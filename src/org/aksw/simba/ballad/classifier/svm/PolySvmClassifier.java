@@ -12,14 +12,12 @@ public class PolySvmClassifier extends SvmClassifier {
 		super(trainFile, testFile);
 		kernelType = svm_parameter.POLY;
 		this.degree = 3;
-		run();
 	}
 
 	public PolySvmClassifier(String trainFile, String testFile, int degree) {
 		super(trainFile, testFile);
 		kernelType = svm_parameter.POLY;
 		this.degree = degree;
-		run();
 	}
 
 	@Override

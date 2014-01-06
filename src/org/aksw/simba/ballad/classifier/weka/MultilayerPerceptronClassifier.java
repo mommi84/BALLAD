@@ -12,7 +12,6 @@ public class MultilayerPerceptronClassifier extends WekaClassifier {
 		super(trainFile, testFile);
 
 		this.cmodel = new MultilayerPerceptron();
-		run();
 
 	}
 

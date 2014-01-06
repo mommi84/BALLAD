@@ -12,7 +12,6 @@ public class LogisticClassifier extends WekaClassifier {
 		super(trainFile, testFile);
 
 		this.cmodel = new Logistic();
-		run();
 
 	}
 

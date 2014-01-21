@@ -1,1 +1,1 @@
-java -Xmx8G -XX:+HeapDumpOnOutOfMemoryError -cp bin/:lib/* org.aksw.simba.ballad.Ballad "oaei-person1" > oaei-person1.txt
+java -Xmx8G -XX:+HeapDumpOnOutOfMemoryError -cp bin/:lib/* org.aksw.simba.ballad.Ballad "oaei-person1"

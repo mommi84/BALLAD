@@ -42,7 +42,7 @@ public abstract class SvmClassifier implements BasicClassifier {
 		// default values
 		parameter.C = 1E+6;
 		parameter.eps = 1E-3;
-		
+		parameter.gamma = 1;
 	}
 	
 	public void setC(double val) {
@@ -51,6 +51,10 @@ public abstract class SvmClassifier implements BasicClassifier {
 
 	public void setEps(double val) {
 		parameter.eps = val;
+	}
+	
+	public void setGamma(double val) {
+		parameter.gamma = val;
 	}
 
 	@Override
@@ -100,7 +104,6 @@ public abstract class SvmClassifier implements BasicClassifier {
 		problem.y = y;
 		parameter.svm_type = svm_parameter.C_SVC;
 		parameter.kernel_type = kernelType;
-		parameter.gamma = 1;
 		
 		if(kernelType == svm_parameter.POLY)
 			parameter.degree = degree;
@@ -109,6 +112,7 @@ public abstract class SvmClassifier implements BasicClassifier {
 		model = svm.svm_train(problem, parameter);
 
 		// evaluate test set
+		tp = tn = fp = fn = 0;
 		try {
 			File f = new File(testFile);
 

@@ -25,7 +25,7 @@ import org.aksw.simba.ballad.similarity.WeightedNgramSimilarity;
  */
 public class OutputHandler {
 
-	public static final double SELECTION_RATE = 0.1;
+	public static final double SELECTION_RATE = 0.001;
 	private static TreeSet<Link> trainingSet = new TreeSet<Link>();
 	private Join join;
 	private Mapping mapping;

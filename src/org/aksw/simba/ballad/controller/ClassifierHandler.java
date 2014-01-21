@@ -49,7 +49,7 @@ public class ClassifierHandler {
 		System.out.println("\n========== RUNTIME ===========");
 		for(Double d : runtimes)
 			System.out.print(d + "\t");
-		System.out.println("\n========== ACCURACY ===========");
+		System.out.println("\n========== F-SCORE ===========");
 		for(Double d : fscores)
 			System.out.print(d + "\t");
 		

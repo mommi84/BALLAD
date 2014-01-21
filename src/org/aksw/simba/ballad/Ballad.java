@@ -12,6 +12,9 @@ import org.aksw.simba.ballad.model.Mapping;
 
 /**
  * BALLAD - Batch Learners Evaluation for Link Discovery.
+ * GitHub project page: <https://github.com/mommi84/BALLAD>
+ * 
+ * This class contains the main method to run the evaluation pipeline.
  * 
  * @author Tommaso Soru <tsoru@informatik.uni-leipzig.de>
  * 
@@ -19,7 +22,8 @@ import org.aksw.simba.ballad.model.Mapping;
 public class Ballad {
 
 	/**
-	 * @param args
+	 * Runs the evaluation pipeline.
+	 * @param args The property file name, without ".properties" extension, located in <i>/bin</i>.
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {

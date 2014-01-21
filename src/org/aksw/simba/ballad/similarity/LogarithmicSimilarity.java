@@ -32,9 +32,9 @@ public class LogarithmicSimilarity implements Similarity {
 			System.err.println("LogarithmicSimilarity: compute extrema first!");
 			return Double.NaN;
 		}
-		double sd = Math.log10(ValueParser.parse(term1));
-		double td = Math.log10(ValueParser.parse(term2));
-		return Math.pow(normalize(Math.abs(sd-td)), 3);
+		double sd = toLogScale(ValueParser.parse(term1));
+		double td = toLogScale(ValueParser.parse(term2));
+		return normalize((Math.abs(sd-td)));
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class LogarithmicSimilarity implements Similarity {
 		extrema.clear();
 		double maxS = Double.NEGATIVE_INFINITY, minS = Double.POSITIVE_INFINITY;
 		for(Resource s : sources) {
-			double d = Math.log10(ValueParser.parse( s.getPropertyValue(sourceProperty) ));
+			double d = ValueParser.parse( s.getPropertyValue(sourceProperty) );
 			if(d > maxS) maxS = d;
 			if(d < minS) minS = d;
 		}
@@ -68,25 +68,54 @@ public class LogarithmicSimilarity implements Similarity {
 		extrema.put("minS", minS);
 		double maxT = Double.NEGATIVE_INFINITY, minT = Double.POSITIVE_INFINITY;
 		for(Resource t : targets) {
-			double d = Math.log10(ValueParser.parse( t.getPropertyValue(targetProperty) ));
+			double d = ValueParser.parse( t.getPropertyValue(targetProperty) );
 			if(d > maxT) maxT = d;
 			if(d < minT) minT = d;
 		}
 		extrema.put("maxT", maxT);
 		extrema.put("minT", minT);
 		System.out.println(extrema.toString());
+		
+		double maxMax = Math.max(extrema.get("maxS"), extrema.get("maxT"));
+		extrema.put("maxMax", maxMax);
+		double minMin = Math.min(extrema.get("minS"), extrema.get("minT"));
+		extrema.put("minMin", minMin);
+		// Log(minMin) = Log(1) = 0
+		extrema.put("denom", toLogScale(maxMax));
+
+	}
+	
+	private double toLogScale(double x) {
+		return Math.log10(x - extrema.get("minMin") + 1);
 	}
 
 	private double normalize(double value) {
 		// incomplete information
 		if(Double.isNaN(value))
 			return Double.NaN;
-		double denom = Math.max(extrema.get("maxT") - extrema.get("minS"), 
-				extrema.get("maxS") - extrema.get("minT"));
+		
+		double denom = extrema.get("denom");
+		
 		if(denom == 0.0)
 			return 1.0;
 		else
 			return 1.0 - value / denom;
+	}
+
+	/**
+	 * Test.
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		LogarithmicSimilarity ls = new LogarithmicSimilarity();
+		ls.extrema.put("minMin", 0.0);
+		ls.extrema.put("denom", ls.toLogScale(30001.0));
+		
+		System.out.println(ls.compute("0", "1"));
+		System.out.println(ls.compute("30000", "30001"));
+		System.out.println(ls.compute("-2", "200"));
+		
 	}
 
 

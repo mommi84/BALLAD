@@ -10,6 +10,7 @@ BALLAD is the acronym of *Batch Learners Evaluation for Link Discovery*, a compa
 
 A quick demo on the *OAEI Person1* dataset (UNIX systems)
 
+	cd BALLAD
 	chmod +x launcher
 	./launcher
 

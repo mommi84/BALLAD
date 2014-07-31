@@ -2,6 +2,12 @@
 
 BALLAD is the acronym of *Batch Learners Evaluation for Link Discovery*, a comparison of supervised machine-learning approaches for discovering new links in the Linked Data cloud.
 
+## Citing
+
+Tommaso Soru and Axel-Cyrille Ngonga Ngomo, *"A Comparison of Supervised Learning Classifiers for Link Discovery"*, in proceeding of the 10th International Conference on Semantic Systems (SEMANTiCS), 2014 [[PDF](http://svn.aksw.org/papers/2014/SEMANTiCS_ComparisonLD/public.pdf)]
+
+A technical report is also available [here](http://mommi84.github.io/BALLAD).
+
 ## Install
 
 	git clone https://github.com/mommi84/BALLAD.git
@@ -48,5 +54,5 @@ Example:
 	
 	# Optional properties
 	
-	svm_parameter_c = 1E+6
-	svm_parameter_eps = 1E-3
+	svm_parameter_c=1E+6
+	svm_parameter_eps=1E-3

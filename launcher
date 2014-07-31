@@ -1,1 +1,2 @@
-java -Xmx8G -XX:+HeapDumpOnOutOfMemoryError -cp bin/:lib/* org.aksw.simba.ballad.Ballad "oaei-person1"
+java -Xmx4G -XX:+HeapDumpOnOutOfMemoryError -cp bin/:lib/* org.aksw.simba.ballad.Ballad "amazon-googlep" > res_amazon.txt
+java -Xmx4G -XX:+HeapDumpOnOutOfMemoryError -cp bin/:lib/* org.aksw.simba.ballad.Ballad "dblp-acm" > res_dblp.txt

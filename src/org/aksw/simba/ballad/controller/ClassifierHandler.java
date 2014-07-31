@@ -7,11 +7,13 @@ import org.aksw.simba.ballad.classifier.BasicClassifier;
 import org.aksw.simba.ballad.classifier.svm.LinearSvmClassifier;
 import org.aksw.simba.ballad.classifier.svm.PolySvmClassifier;
 import org.aksw.simba.ballad.classifier.weka.DecisionTableClassifier;
+import org.aksw.simba.ballad.classifier.weka.J48Classifier;
 import org.aksw.simba.ballad.classifier.weka.LogisticClassifier;
 import org.aksw.simba.ballad.classifier.weka.MultilayerPerceptronClassifier;
 import org.aksw.simba.ballad.classifier.weka.NaiveBayesClassifier;
 import org.aksw.simba.ballad.classifier.weka.RandomTreeClassifier;
 import org.aksw.simba.ballad.classifier.weka.RegressionClassifier;
+import org.aksw.simba.ballad.classifier.weka.SMOClassifier;
 
 /**
  * @author Tommaso Soru <tsoru@informatik.uni-leipzig.de>
@@ -37,14 +39,16 @@ public class ClassifierHandler {
 		
 		time = System.currentTimeMillis();
 		
-		train(new LinearSvmClassifier(trainFile, testFile));
-		train(new PolySvmClassifier(trainFile, testFile));
-		train(new MultilayerPerceptronClassifier(trainFile, testFile));
-		train(new RegressionClassifier(trainFile, testFile));
-		train(new DecisionTableClassifier(trainFile, testFile));
-		train(new NaiveBayesClassifier(trainFile, testFile));
-		train(new RandomTreeClassifier(trainFile, testFile));
-		train(new LogisticClassifier(trainFile, testFile));
+//		train(new LinearSvmClassifier(trainFile, testFile));
+//		train(new PolySvmClassifier(trainFile, testFile));
+//		train(new MultilayerPerceptronClassifier(trainFile, testFile));
+//		train(new RegressionClassifier(trainFile, testFile));
+//		train(new DecisionTableClassifier(trainFile, testFile));
+//		train(new NaiveBayesClassifier(trainFile, testFile));
+//		train(new RandomTreeClassifier(trainFile, testFile));
+//		train(new LogisticClassifier(trainFile, testFile));
+		train(new J48Classifier(trainFile, testFile));
+		train(new SMOClassifier(trainFile, testFile));
 		
 		System.out.println("\n========== RUNTIME ===========");
 		for(Double d : runtimes)
@@ -61,6 +65,8 @@ public class ClassifierHandler {
 				((LinearSvmClassifier) bc).setC(Double.parseDouble(Bundle.getString("svm_parameter_c")));
 			if(bc instanceof PolySvmClassifier)
 				((PolySvmClassifier) bc).setC(Double.parseDouble(Bundle.getString("svm_parameter_c")));
+			if(bc instanceof SMOClassifier)
+				((SMOClassifier) bc).setC(Double.parseDouble(Bundle.getString("svm_parameter_c")));
 		} catch (NumberFormatException e) {
 			System.out.println("Key 'svm_parameter_c' not found, using default value.");
 		}
@@ -69,6 +75,8 @@ public class ClassifierHandler {
 				((LinearSvmClassifier) bc).setEps(Double.parseDouble(Bundle.getString("svm_parameter_eps")));
 			if(bc instanceof PolySvmClassifier)
 				((PolySvmClassifier) bc).setEps(Double.parseDouble(Bundle.getString("svm_parameter_eps")));
+			if(bc instanceof SMOClassifier)
+				((SMOClassifier) bc).setEps(Double.parseDouble(Bundle.getString("svm_parameter_eps")));
 		} catch (NumberFormatException e) {
 			System.out.println("Key 'svm_parameter_eps' not found, using default value.");
 		}

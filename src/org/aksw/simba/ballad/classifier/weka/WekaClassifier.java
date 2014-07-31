@@ -1,9 +1,12 @@
 package org.aksw.simba.ballad.classifier.weka;
 
+import java.util.Random;
+
 import org.aksw.simba.ballad.classifier.BasicClassifier;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
+import weka.classifiers.evaluation.output.prediction.PlainText;
 import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 import weka.filters.Filter;
@@ -68,8 +71,29 @@ public abstract class WekaClassifier implements BasicClassifier {
 		}
 		
 		// Print the result à la Weka explorer:
-		System.out.println(eTest.toSummaryString());
+		System.out.println(eTest.toSummaryString(true));
+		StringBuffer sb = new StringBuffer();
+		PlainText pt = new PlainText();
+	    pt.setBuffer(sb);
+	    pt.setAttributes("1"); 
+//		try {
+//			eTest.crossValidateModel(cmodel, test, 10, new Random(1),
+//					pt);
+//			System.out.println(pt.getAttributes());
+//			System.out.println(pt.getDisplay());
+//			System.out.println(sb);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
+		try {
+			System.out.println(eTest.fMeasure(0));
+			System.out.println("isUpsideDown = "+isUpsideDown);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		// class 1 is "positive"
 		int posClass = 1;
 		if(!isUpsideDown) {

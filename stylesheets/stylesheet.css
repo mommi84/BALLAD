@@ -222,13 +222,26 @@ table {
 }
 
 th {
-  font-weight: 500;
+  font-weight: bold;
+  text-align: right;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 td {
   border: 1px solid #ebebeb;
-  text-align: center; 
+  text-align: right; 
   font-weight: 300;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.align-left {
+  text-align: left;
 }
 
 form {
